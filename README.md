@@ -9,9 +9,9 @@ Deep Neural Networks (DNNs) that take a 2D image of a human face as an input, an
 
 <img src="https://render.githubusercontent.com/render/math?math={S^{i} =  \begin{bmatrix}   x^{i}_{0}   \\ \vdots  \\x_{n-1}\\y^{i}_{0}   \\ \vdots  \\y_{n-1}\\z^{i}_{0}   \\ \vdots  \\z_{n-1}  \end{bmatrix}  \in  \Re ^{3n}}">
 
-<img src="https://render.githubusercontent.com/render/math?math={\bigtriangleup S =  \begin{bmatrix} \vdots & \vdots  & \vdots & \vdots \\ \triangle S^0 & \triangle S^1 & \vdots  & \triangle S^{m-1}\\ \vdots & \vdots & \vdots & \vdots\end{bmatrix}}">
+<img src="https://render.githubusercontent.com/render/math?math={\bigtriangleup S=\begin{bmatrix}  \end{bmatrix}}">
 
-
+ 
 ![alt text](https://github.com/nodecomplete/3DMM-Face-Sample/blob/master/FaceMorph/ScreenShot.jpg)
 
 ![alt text](https://github.com/nodecomplete/3DMM-Face-Sample/blob/master/FaceMorph/ScreenShot2.jpg)
