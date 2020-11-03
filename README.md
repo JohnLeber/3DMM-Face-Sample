@@ -16,9 +16,11 @@ Each shape is represented as a column vector with n vertices:
 
 [//]: <> (T<img src="https://render.githubusercontent.com/render/math?math={\bigtriangleup S=\begin{bmatrix} \vdots  \vdots  \vdots  \vdots \\ {\bigtriangleup S^0  \bigtriangleup S^1  \vdots  \bigtriangleup S^{m-1}} \\ {\vdots  \vdots  \vdots  \vdots } \\ \end{bmatrix}}">)
 
-where the mean/averga emesh is defined as 
+where the mean/average emesh is defined as: 
 
 <img src="https://render.githubusercontent.com/render/math?math={\overline{S} =   \frac{1}{m} \sum_{i=0}^{m-1} S^i %20}">
+
+Each mesh in the sample set can be defined as a linear combitation of all the other meshes:
 
 <img src="https://render.githubusercontent.com/render/math?math={  S^{model}  =\overline{S}%2B\sum_{i=0}^{m-1} \alpha^{i}  \bigtriangleup S^i}">
 
