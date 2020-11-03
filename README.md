@@ -26,12 +26,12 @@ New models are expressed as the mean plus a linear combination of the m shape ve
 
 <img src="https://render.githubusercontent.com/render/math?math={  S^{model}  =\overline{S}%2B\sum_{i=0}^{m-1} \alpha^{i}  \bigtriangleup S^i}">
 
-The dimensionality of the system is m but we can use Principle Component Analysis to determine a new basis vectors for the system such that the most dominant components are included first and the rest can be ignored. i.e.
+The dimensionality of the system is m but we can use Principle Component Analysis to determine a new set of basis vectors for the system such that the most dominant components are included first and the rest can be ignored. i.e.
 
 <img src="https://render.githubusercontent.com/render/math?math={  S^{model}  =\overline{S}%2B\sum_{i=0}^{k-1} \alpha^{i}  \bigtriangleup E^i}">
 
-k is the new dimension (hopefully significantly smaller than m) and E represents the Eigenvectors returned from the Singular Value Decomposition (WVD) method that we use to perform the Principle Component Analysis.
-
+where k is the new dimension (hopefully significantly smaller than m) and E represents the Eigenvectors returned from the Singular Value Decomposition (SVD) method that we use to perform the Principle Component Analysis.
+In the demo application the Meshes folder includes 204 face meshes and so we have m=204. In the image below, it nca be seen that
 
 
 ![alt text](https://github.com/nodecomplete/3DMM-Face-Sample/blob/master/FaceMorph/ScreenShot2.jpg)
