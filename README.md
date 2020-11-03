@@ -14,9 +14,9 @@ Each shape is represented as a column vector with n vertices:
 
 <img src="https://render.githubusercontent.com/render/math?math={S^{i} =  \begin{bmatrix}   x^{i}_{0}   \\ \vdots  \\x_{n-1}\\y^{i}_{0}   \\ \vdots  \\y_{n-1}\\z^{i}_{0}   \\ \vdots  \\z_{n-1}  \end{bmatrix}  \in  \Re ^{3n}}">
 
-<img src="https://render.githubusercontent.com/render/math?math={\bigtriangleup S=\begin{bmatrix} \vdots  \vdots  \vdots  \vdots \\ {\bigtriangleup S^0  \bigtriangleup S^1  \vdots  \bigtriangleup S^{m-1}} \\ {\vdots  \vdots  \vdots  \vdots } \\ \end{bmatrix}}">
+[//]: <> (T<img src="https://render.githubusercontent.com/render/math?math={\bigtriangleup S=\begin{bmatrix} \vdots  \vdots  \vdots  \vdots \\ {\bigtriangleup S^0  \bigtriangleup S^1  \vdots  \bigtriangleup S^{m-1}} \\ {\vdots  \vdots  \vdots  \vdots } \\ \end{bmatrix}}">)
 
-<img src="https://render.githubusercontent.com/render/math?math={  S^{model}  =\overline{S} +  \sum_{i=0}^{m-1} \alpha^{i}  \bigtriangleup S^i}">
+<img src="https://render.githubusercontent.com/render/math?math={  S^{model}  =\overline{S}%2B\sum_{i=0}^{m-1} \alpha^{i}  \bigtriangleup S^i}">
 
 where 
 
