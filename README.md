@@ -16,12 +16,15 @@ Each shape is represented as a column vector with n vertices:
 
 <img src="https://render.githubusercontent.com/render/math?math={\bigtriangleup S=\begin{bmatrix} \vdots  \vdots  \vdots  \vdots \\ {\bigtriangleup S^0  \bigtriangleup S^1  \vdots  \bigtriangleup S^{m-1}} \\ {\vdots  \vdots  \vdots  \vdots } \\ \end{bmatrix}}">
 
-
 <img src="https://render.githubusercontent.com/render/math?math={  S^{model}  =\overline{S} +  \sum_{i=0}^{m-1} \alpha^{i}  \bigtriangleup S^i}">
 
- <img src="https://render.githubusercontent.com/render/math?math={\overline{S} =   \frac{1}{m} \sum_{i=0}^{m-1} S^i %20}">
- 
-  <img src="https://render.githubusercontent.com/render/math?math={ \bigtriangleup S^i=(S^i -\overline{S}) }">
+where 
+
+<img src="https://render.githubusercontent.com/render/math?math={\overline{S} =   \frac{1}{m} \sum_{i=0}^{m-1} S^i %20}">
+
+and
+
+<img src="https://render.githubusercontent.com/render/math?math={ \bigtriangleup S^i=(S^i -\overline{S}) }">
  
 ![alt text](https://github.com/nodecomplete/3DMM-Face-Sample/blob/master/FaceMorph/ScreenShot.jpg)
 
