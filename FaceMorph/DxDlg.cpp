@@ -75,7 +75,16 @@ bool CDxWnd::Initialize(CWnd* pParent)
 		InitAllVertexDeclarations(g_pD3DDevice);
 		//LoadEigenValues();
 		//LoadMeanFace();
-		if (!CalcEigenValues())
+		CString strMeshPath;
+		TCHAR szFilePath[MAX_PATH + _ATL_QUOTES_SPACE];
+		DWORD dwFLen = ::GetModuleFileName(NULL, szFilePath + 0, MAX_PATH);
+		strMeshPath = CString(szFilePath);
+		long nRight = strMeshPath.ReverseFind(_T('\\'));//remove exe name
+		strMeshPath = strMeshPath.Left(nRight);//this will ne the same folder as the EXe
+		nRight = strMeshPath.ReverseFind(_T('\\'));//move one folder up
+		strMeshPath = strMeshPath.Left(nRight);//this will ne the same folder as 
+		strMeshPath.Append(L"\\Meshes\\");
+		if (!CalcEigenValues(strMeshPath))
 		{
 			m_nNumVertices = 0;
 		}
@@ -101,27 +110,23 @@ bool CDxWnd::Initialize(CWnd* pParent)
 	return bResult;
 }  
 //---------------------------------------------------------------//
-bool CDxWnd::CalcEigenValues()
+bool CDxWnd::CalcEigenValues(CString strMeshPath)
 {
 	std::vector<std::vector<float> > vMeshes;
-
-	CString strSearchPath;
-	TCHAR szFilePath[MAX_PATH + _ATL_QUOTES_SPACE];
-	DWORD dwFLen = ::GetModuleFileName(NULL, szFilePath + 0, MAX_PATH);
-	strSearchPath = CString(szFilePath);
-	long nRight = strSearchPath.ReverseFind(_T('\\'));//remove exe name
-	strSearchPath = strSearchPath.Left(nRight);//this will ne the same folder as the EXe
-	nRight = strSearchPath.ReverseFind(_T('\\'));//move one folder up
-	strSearchPath = strSearchPath.Left(nRight);//this will ne the same folder as 
- 
-	strSearchPath.Append(L"\\Meshes\\");
-
+	 
 	CFileFind finder;
 	int nNumVertices = -1;
-  
+	int nI1 = 0;
+	int nI2 = 0;
+	int nI3 = 0;
+
+	////////////////////////////////////////////////////////////////////////////////////////
+	//STEP ONE: load the files
+	////////////////////////////////////////////////////////////////////////////////////////
+	
 	//count the number of files we will have to load
 	int nNumFiles = 0;
-	BOOL bWorking = finder.FindFile(strSearchPath + _T("*.mesh"));
+	BOOL bWorking = finder.FindFile(strMeshPath + _T("*.mesh"));
 	while (bWorking)
 	{
 		bWorking = finder.FindNextFile();
@@ -130,7 +135,7 @@ bool CDxWnd::CalcEigenValues()
 	finder.Close();
 	 
 	int nFileCounter = 0;
-	bWorking = finder.FindFile(strSearchPath + _T("*.mesh"));
+	bWorking = finder.FindFile(strMeshPath + _T("*.mesh"));
 	while (bWorking)
 	{
 		bWorking = finder.FindNextFile();
@@ -203,9 +208,6 @@ bool CDxWnd::CalcEigenValues()
 				else if (nFileCounter == 0 && 0 == strncmp("f ", buffer, 2))
 				{
 					//load face information (list of three points forming a triangle). Do it for the first mesh only as the rest should be the same
-					INT nI1 = 0;
-					INT nI2 = 0;
-					INT nI3 = 0;  
 					sscanf_s(buffer + 1, "%d %d %d", &nI1, &nI2, &nI3);
 					m_vIndices.push_back(nI1 - 1);
 					m_vIndices.push_back(nI2 - 1);
@@ -217,11 +219,29 @@ bool CDxWnd::CalcEigenValues()
 		}
 	}
 	finder.Close();
-	//complete calculating the mean/average face mesh
+
+	////////////////////////////////////////////////////////////////////////////////////////
+	//STEP TWO: calculate the mean/average face mesh
+	////////////////////////////////////////////////////////////////////////////////////////
 	for (std::vector<float>::iterator i = m_AveFace.begin(); i != m_AveFace.end(); ++i)
 	{
 		*i = *i / nNumFiles;
 	}
+
+	////////////////////////////////////////////////////////////////////////////////////////
+	//STEP THREE: subtract the mean from each face mesh
+	////////////////////////////////////////////////////////////////////////////////////////
+	for (int h = 0; h < nNumFiles; h++)
+	{
+		for (int j = 0; j < nNumVertices * 3; j++)
+		{
+			vMeshes[h][j] = vMeshes[h][j] - m_AveFace[j];
+		}
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////
+	//STEP FOUR: calculate the eigenvectors
+	////////////////////////////////////////////////////////////////////////////////////////
 	MatrixXf X(nNumVertices * 3, nNumFiles);
 	for (int h = 0; h < nNumFiles; h++)
 	{
@@ -230,15 +250,16 @@ bool CDxWnd::CalcEigenValues()
 			X(j, h) = vMeshes[h][j];
 		}
 	}
-	JacobiSVD<MatrixXf> svd(X, ComputeThinU | ComputeThinV);
-	
+
+	//Use Principle Component Analysis. SVD routine in the Eigen library to do this
+	JacobiSVD<MatrixXf> svd(X, ComputeThinU | ComputeThinV); 
 	MatrixXf U = svd.matrixU();
 	MatrixXf V = svd.matrixV();
 	VectorXf s = svd.singularValues();
 	int rows = s.rows();
 	int columns = s.cols();
 
-	//the following should give us an idea of which/how manu eigencvaectoers are important.
+	//the following should give us an idea of which/how manu eigencvectors are important.
 	for (int h = 0; h < rows; h++)
 	{
 		ATLTRACE2(L"s(%d) = %f\n", h + 1, s(h));
@@ -250,8 +271,7 @@ bool CDxWnd::CalcEigenValues()
 		AfxMessageBox(strMsg);
 		return false;
 	}
-	//MatrixXf S = s.asDiagonal();
-	//now calculate the eigen vectors
+	  
 	//There will be nNumFiles eigenvectors, but only take the first 20 (NUM_EIGENS)
 	m_Eigen.reserve(NUM_EIGENS);
 	m_Eigen.resize(NUM_EIGENS);
@@ -264,6 +284,8 @@ bool CDxWnd::CalcEigenValues()
 			m_Eigen[h][j] = U(j, h);
 		}
 	} 
+	//We now have the eignevectors. The mesh that is rendered will be the average/mean mesh plus a linesy combintation of the 
+	//the eignevector meshes (m_Eigen). That is each eignevector is multipled by the scalar correpnding to each slider in the UI.
 	return true;
 }
 //---------------------------------------------------------------//
