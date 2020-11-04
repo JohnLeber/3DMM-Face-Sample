@@ -11,7 +11,7 @@ Deep Neural Networks (DNNs) that perform Face Reconstruction (e.g. Microsoft's [
 2) How does the DNN output the mesh. If the face mesh has 70,000+ vertices, does this mean the last layer of the DNN has this many outputs (no, as it turns out).
 3) How are 3DMMs stored in files?
 
-I attempt to answer these questions by creating a DirectX/C++ application that demonstrates how to construct and render a 3D Morphable Model (3DMM) of a human Face. The model can then be exported and loaded into Matlab.
+What follows is an attempt to answer these questions by creating a DirectX/C++ application that demonstrates how to construct and render a 3D Morphable Model (3DMM) of a human Face. An option to export the model is provided along with sample code for loading the model into Matlab.
 
 **Discussion** 
 
