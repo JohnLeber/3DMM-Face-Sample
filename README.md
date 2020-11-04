@@ -6,19 +6,14 @@
 
 **Introduction** 
 
-Deep Neural Networks (DNNs) that take as an input a 2D image of a human face and output a 3D mesh (e.g. Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction)) often incorporate a 3D Morphable Face Model (3DMM) in their pipeline. One such example is [Basel](https://faces.dmi.unibas.ch/bfm/) as used by [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction). When encountering such a DNN for the first time, one might expect that the mesh, which consists of vertices and indices, is perhaps output directly by the final layer of the DNN (the basel face mesh used in Deep3DFaceReconstruction has over 70,000 triangles). This is turns out not to be true however. Below we look at what exactly a 3DMM is, and how it is used in face recosntruction/mesh creation DNNs.
-
-purpose was to understand:
-1) what is a 3DMM 
-2) how are they used in face/reconstruction/mesh creation.
-3) how are they stored in files.
+Deep Neural Networks (DNNs) that perform Face Reconstruction (e.g. Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction)), or that take a 2D image of a human face and output a 3D mesh, often include a 3D Morphable Face Model (3DMM) as part of their pipeline. The purpose of this project was to help me gain a practical understanding of 3DMMs. Specifcally, when I downloaded Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction) the following questions came to mind:
+1) what exactly is a 3DMM?
+2) How does the DNN output the mesh. If the face mesh has 70,000+ vertices, does this meant he last layer of the DNN has this many outputs (no, as it turns out).
+3) how are 3DMM stored in files?
 
 **Discussion** 
 
-3 3DMM is created by scanning multiple faces e.g. using a 
-
-
-Each mesh is represented as a series of shape vectors:
+The first step in creating a 3DMM of a human face is to obtain a large number of 3D scans of faces. In the case of the 2009 Basel model, 100 male faces and 100 females faces were used. These are then converted into 3D meshes (consisting of vertices and indexes). Once acquired, each mesh is represented as a series of shape vectors:
 
 <img src="https://render.githubusercontent.com/render/math?math={S^0,%20S^1%20%20%20...%20%20%20S^{m-1} }">
 
