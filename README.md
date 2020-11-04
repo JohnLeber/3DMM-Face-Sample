@@ -45,12 +45,13 @@ In the demo application, the Meshes folder includes 204 face meshes and so we ha
 
 <img src="https://render.githubusercontent.com/render/math?math={\alpha^{i},  %20%20%20%20  \0 \leq  i < k}">
  
-The image below shows theses scalars set to zero, so the image displayed is the average/mean face. The second image shows the change in the mesh when the first slider (first principle component) is non-zero.
- 
+The image below shows theses scalars set to zero, so the image displayed is the average/mean face. 
 
 ![alt text](https://github.com/nodecomplete/3DMM-Face-Sample/blob/master/FaceMorph/ScreenShot.jpg)
 
 [comment]: <> (<img src="https://render.githubusercontent.com/render/math?math={\bigtriangleup S=\begin{bmatrix} \vdots   \\ {\bigtriangleup S^0  \bigtriangleup S^1  \ldots  \bigtriangleup S^{m-1}} \\ {\vdots  } \\ \end{bmatrix}}">)
+ 
+The second image shows the change in the mesh when the first slider (first principle component) is non-zero.
  
 ![alt text](https://github.com/nodecomplete/3DMM-Face-Sample/blob/master/FaceMorph/ScreenShot2.jpg)
 
