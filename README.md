@@ -39,7 +39,7 @@ The dimensionality of the system is m but we can use [Principle Component Analys
 
 <img src="https://render.githubusercontent.com/render/math?math={  S^{model}  =\overline{S}%2B\sum_{i=0}^{k-1} \alpha^{i}  \E^i}">
 
-where k is the new dimension (hopefully significantly smaller than m) and E represent the Eigenvectors returned from the [Singular Value Decomposition](https://en.wikipedia.org/wiki/Singular_value_decomposition) (SVD) method that we use to perform the Principle Component Analysis.
+where k is the new dimension (hopefully significantly smaller than m) and E represents the Eigenvectors returned from the [Singular Value Decomposition](https://en.wikipedia.org/wiki/Singular_value_decomposition) (SVD) method that we use to perform the Principle Component Analysis.
 
 In the demo application, the Meshes folder includes 204 face meshes and so we have m = 204. After performing SVD on these meshes, only the first 20 are included and the rest are discarded, so we have k=20. In the image below, the 20 sliders are used to control the scalar multipliers (presented as alpha in the previous equation):
 
