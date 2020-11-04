@@ -1,6 +1,6 @@
 # 3DMM-Face-Sample
 
->**Note**: The purpose of this project was to help me understand what 3D Morphable Models (3DMM) are and how they are used with face reconstruction DNNs. While it can be used to create a 3DMM of a human face, it is unlikely it will be a substitute for a production quality 3DMM that would be useful in a research or commercial use. Consider what follows to be of education value only.
+>**Note**: The purpose of this project was to help me understand what 3D Morphable Models (3DMM) are and how they are used with face reconstruction DNNs. While it can be used to create a 3DMM of a human face, it is unlikely that the approach used will result a production quality 3DMM that would be useful for research or commercial use. Consider what follows to be of education value only.
 
 ![alt text](https://github.com/nodecomplete/3DMM-Face-Sample/blob/master/FaceMorph/Faces.jpg)
 
@@ -15,7 +15,7 @@ What follows is an attempt to answer these questions by creating a DirectX/C++ a
 
 ## Discussion
 
-The first step in creating a 3DMM of a human face is to obtain a large number of 3D scans of faces. In the case of the [2009 Basel model](https://faces.dmi.unibas.ch/bfm/index.php?nav=1-0&id=basel_face_model), 100 male faces and 100 females faces were used. These are then converted into 3D meshes (consisting of vertices and indexes). Once acquired, each mesh is represented as a series of shape vectors:
+The first step in creating a 3DMM of a human face is to obtain a large number of 3D scans of faces. In the case of the [2009 Basel model](https://faces.dmi.unibas.ch/bfm/index.php?nav=1-0&id=basel_face_model), 100 male faces and 100 females faces were used. These scans are then converted into 3D meshes. Once acquired, each mesh is represented as a series of shape vectors:
 
 <img src="https://render.githubusercontent.com/render/math?math={S^0,%20S^1%20%20%20...%20%20%20S^{m-1} }">
 
