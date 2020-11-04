@@ -34,7 +34,7 @@ where k is the new dimension (hopefully significantly smaller than m) and E repr
 
 In the demo application, the Meshes folder includes 204 face meshes and so we have m = 204. After performing SVD on these meshes, only the first 20 are included and the rest are discarded, so we have k=20. In the image below, the 20 sliders are used to control the scalar multipliers (presented as alpha in the previous equation):
 
-<img src="https://render.githubusercontent.com/render/math?math={\alpha^{i}%20%200 \leq  i < k}">
+<img src="https://render.githubusercontent.com/render/math?math={\alpha^{i},  %20%20%20%20  \0 \leq  i < k}">
 
 
 ![alt text](https://github.com/nodecomplete/3DMM-Face-Sample/blob/master/FaceMorph/ScreenShot2.jpg)
