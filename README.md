@@ -6,7 +6,7 @@
 
 **Introduction** 
 
-Deep Neural Networks (DNNs) that perform Face Reconstruction (e.g. Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction)), or that take a 2D image of a human face and output a 3D mesh, often include a 3D Morphable Face Model (3DMM) as part of their pipeline. The purpose of this project was to help me gain a practical understanding of 3DMMs when used in this context. Specifcally, when I downloaded Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction) the following questions came to mind:
+Deep Neural Networks (DNNs) that perform Face Reconstruction (e.g. Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction)), or that take a 2D image of a human face and output a 3D mesh, often include a 3D Morphable Face Model (3DMM) as part of their pipeline. The purpose of this project was to help gain a practical understanding of 3DMMs when used in this context. Specifcally, when I downloaded Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction) the following questions came to mind:
 1) What exactly is a 3DMM?
 2) How does the DNN output the mesh. If the face mesh has 70,000+ vertices, does this mean the last layer of the DNN has this many outputs (no, as it turns out).
 3) How are 3DMMs stored in files?
