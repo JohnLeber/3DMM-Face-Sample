@@ -19,7 +19,7 @@ Each mesh is represented as a series of shape vectors:
 
 Each shape is represented as a column vector with n vertices:
 
-<img src="https://render.githubusercontent.com/render/math?math={S^{i} =  \begin{bmatrix}   x^{i}_{0}   \\ \vdots  \\x_{n-1}\\y^{i}_{0}   \\ \vdots  \\y_{n-1}\\z^{i}_{0}   \\ \vdots  \\z_{n-1}  \end{bmatrix}  \in  \Re ^{3n}}">
+<img src="https://render.githubusercontent.com/render/math?math={S^{i} =  \begin{bmatrix}   x^{i}_{0}   \\ \vdots  \\x^{i}_{n-1}\\y^{i}_{0}   \\ \vdots  \\y^{i}_{n-1}\\z^{i}_{0}   \\ \vdots  \\z^{i}_{n-1}  \end{bmatrix}  \in  \Re ^{3n}}">
 
 where the mean/average mesh is defined as: 
 
