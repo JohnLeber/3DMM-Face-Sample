@@ -53,7 +53,7 @@ The following conclusions can be drawn from the above analysis:
 
 2) A 3DMM of a human face consists of the following:
 
-- k Eigenvectors, each of length n where n is the number of vertices of the face mesh.
+- k eigenvectors, each of length n where n is the number of vertices of the face mesh.
  
 - the average/mean face mesh also of dimension n.
  
