@@ -6,19 +6,14 @@
 
 **Introduction** 
 
-Deep Neural Networks (DNNs) that take as an input a 2D image of a human face and output a 3D mesh (e.g. Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction)) often incorporate a 3D Morphable Face Model (3DMM) in their pipeline. One such example is [Basel](https://faces.dmi.unibas.ch/bfm/) as used by [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction). When encountering such a DNN for the first time, one might expect that the mesh, which consists of vertices and indices, is perhaps output directly by the final layer of the DNN (the basel face mesh used in Deep3DFaceReconstruction has over 70,000 triangles). This is turns out not to be true however. Below we look at what exactly a 3DMM is, and how it is used in face recosntruction/mesh creation DNNs.
-
-purpose was to understand:
-1) what is a 3DMM 
-2) how are they used in face/reconstruction/mesh creation.
-3) how are they stored in files.
+Deep Neural Networks (DNNs) that perform Face Reconstruction (e.g. Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction)), or that take a 2D image of a human face and output a 3D mesh, often include a 3D Morphable Face Model (3DMM) as part of their pipeline. The purpose of this project was to help me gain a practical understanding of 3DMMs when used in this context. Specifcally, when I downloaded Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction) the following questions came to mind:
+1) What exactly is a 3DMM?
+2) How does the DNN output the mesh. If the face mesh has 70,000+ vertices, does this mean the last layer of the DNN has this many outputs (no, as it turns out).
+3) How are 3DMMs stored in files?
 
 **Discussion** 
 
-3 3DMM is created by scanning multiple faces e.g. using a 
-
-
-Each mesh is represented as a series of shape vectors:
+The first step in creating a 3DMM of a human face is to obtain a large number of 3D scans of faces. In the case of the [2009 Basel model](https://faces.dmi.unibas.ch/bfm/index.php?nav=1-0&id=basel_face_model), 100 male faces and 100 females faces were used. These are then converted into 3D meshes (consisting of vertices and indexes). Once acquired, each mesh is represented as a series of shape vectors:
 
 <img src="https://render.githubusercontent.com/render/math?math={S^0,%20S^1%20%20%20...%20%20%20S^{m-1} }">
 
@@ -87,10 +82,10 @@ The following conclusions can be drawn from the above analysis:
 
 When executed, the EXE performs the following:
 1) loads the sample nmeshes from the 'meshes' folder 
-2) Calculates the average mesh by adding all vertices and dividing by the total number of meshes
+2) calculates the average mesh by adding all vertices and dividing by the total number of meshes
 3) subtracts the average mesh from each of the meshes
-4) Calculates the eigenvectors using the JacobiSVD SVD fucntion in the Eigen libraries 
-5) Creates and renders a mesh on-the-fly created using the following equation where the scalar paramters are dynmically updated from the slider controls.
+4) calculates the eigenvectors using the JacobiSVD SVD fucntion in the Eigen libraries 
+5) creates and renders a mesh on-the-fly created using the following equation where the scalar parameters are dynamically updated from the slider controls.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://render.githubusercontent.com/render/math?math={  S^{model}  =\overline{S}%2B\sum_{i=0}^{k-1} \alpha^{i}  \E^i}">
 
@@ -100,7 +95,7 @@ When executed, the EXE performs the following:
 1) The software won't display the main dialog box until the above steps are complete, so it may appear not to start up right away.
 2) Normally the sample meshes (location in the 'meshes' folder) used to create the model are scanned from real faces. In this case it wasn't practical to do this, and the meshes were createed using [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction). The images from which the meshes were created were aligned (with respect to eyes, nose...) to produce better results. See [here](https://www.youtube.com/watch?v=OaCmD08xxGw) why alignment of the meshes is important.
 3) Production quality 3D Morphable Models of human faces typically seperate shape from facial expressions and have a set of eigenvectors for both. Some also include a third set for texture of the face. 
-4) Finally, I have not attempted to optimize the performance calculations (via threading, vectorization, cache coherency etc) and I apologize for using a legacy version of DirectX!!
+4) Finally, I have not attempted to optimize the performance calculations (via threading, vectorization, cache coherency etc).
 
 
 
