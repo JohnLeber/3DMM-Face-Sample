@@ -70,6 +70,7 @@ The following conclusions can be drawn from the above analysis:
 
 &nbsp;&nbsp;&nbsp;&nbsp;`git clone https://gitlab.com/libeigen/eigen.git`
  
+ 
 **Running the software** 
 
 When executed, the EXE performs the following:
@@ -81,7 +82,9 @@ When executed, the EXE performs the following:
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://render.githubusercontent.com/render/math?math={  S^{model}  =\overline{S}%2B\sum_{i=0}^{k-1} \alpha^{i}  \E^i}">
 
-Additional Notes:
+
+**Additional Notes**
+
 1) the software won't display the main dialog box until the above steps are done, so it may appear not to startup right away.
 2) normally the collections of meshes (location in the 'meshes' folder) used to create the model are scanned from real faces. In this case it wasn't practical to do this, and the meshes were createed using Deep3DFaceRecongition. The images from which the meshes were created were aligned (with respect to eyes, nose...) to produce [better results](https://www.youtube.com/watch?v=OaCmD08xxGw).
 3) production quality 3D Morphable Models of human faces typically seperate shape from facial expressions and have a set of eigenvectors for both. Some also include a third set for texture of the face. 
