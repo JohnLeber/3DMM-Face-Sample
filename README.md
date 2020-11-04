@@ -88,7 +88,7 @@ When executed, the EXE performs the following:
 3) subtracts the average mesh from each of the meshes
 4) calculates the eigenvectors using the JacobiSVD SVD fucntion in the Eigen libraries 
 5) creates and renders a mesh on-the-fly created using the following equation where the scalar parameters are dynamically updated from the slider controls.
-6) Obviously the software only supports Windows.
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://render.githubusercontent.com/render/math?math={  S^{model}  =\overline{S}%2B\sum_{i=0}^{k-1} \alpha^{i}  \E^i}">
 
 
