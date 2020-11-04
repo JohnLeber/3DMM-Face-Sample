@@ -77,6 +77,9 @@ When executed, the EXE performs the following:
 2) Calculates the average mesh by adding all vertices and dividing by the total number of meshes
 3) subtracts the average mesh from each of the meshes
 4) Calculates the eigenvectors using the Eigen libraries 
+5) Creates and renders a mesh on-the-fly created using the following equation where the scalar paramters are dynmically updated from the slider controls.
+
+<img src="https://render.githubusercontent.com/render/math?math={  S^{model}  =\overline{S}%2B\sum_{i=0}^{k-1} \alpha^{i}  \E^i}">
 
 Additional Notes:
 1) the software won't display the main dialog box until the above steps are done, so it may appear not to startup right away.
