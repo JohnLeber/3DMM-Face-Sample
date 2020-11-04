@@ -26,11 +26,11 @@ then new models are expressed as the mean plus a linear combination of the m sha
 
 <img src="https://render.githubusercontent.com/render/math?math={  S^{model}  =\overline{S}%2B\sum_{i=0}^{m-1} \alpha^{i}  \bigtriangleup S^i}">
 
-The dimensionality of the system is m but we can use Principle Component Analysis to determine a new set of basis vectors for the system such that the most dominant components are included first and the rest can be ignored. i.e.
+The dimensionality of the system is m but we can use [Principle Component Analysis])https://en.wikipedia.org/wiki/Principal_component_analysis_ to determine a new set of basis vectors for the system such that the most dominant components are included first and the rest can be ignored. i.e.
 
 <img src="https://render.githubusercontent.com/render/math?math={  S^{model}  =\overline{S}%2B\sum_{i=0}^{k-1} \alpha^{i}  \E^i}">
 
-where k is the new dimension (hopefully significantly smaller than m) and E represent the Eigenvectors returned from the Singular Value Decomposition (SVD) method that we use to perform the Principle Component Analysis.
+where k is the new dimension (hopefully significantly smaller than m) and E represent the Eigenvectors returned from the [Singular Value Decomposition](https://en.wikipedia.org/wiki/Singular_value_decomposition) (SVD) method that we use to perform the Principle Component Analysis.
 
 In the demo application, the Meshes folder includes 204 face meshes and so we have m = 204. After performing SVD on these meshes, only the first 20 are included and the rest are discarded, so we have k=20. In the image below, the 20 sliders are used to control the scalar multipliers (presented as alpha in the previous equation):
 
