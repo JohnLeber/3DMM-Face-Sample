@@ -82,10 +82,10 @@ The following conclusions can be drawn from the above analysis:
 
 When executed, the EXE performs the following:
 1) loads the sample nmeshes from the 'meshes' folder 
-2) Calculates the average mesh by adding all vertices and dividing by the total number of meshes
+2) calculates the average mesh by adding all vertices and dividing by the total number of meshes
 3) subtracts the average mesh from each of the meshes
-4) Calculates the eigenvectors using the JacobiSVD SVD fucntion in the Eigen libraries 
-5) Creates and renders a mesh on-the-fly created using the following equation where the scalar paramters are dynmically updated from the slider controls.
+4) calculates the eigenvectors using the JacobiSVD SVD fucntion in the Eigen libraries 
+5) creates and renders a mesh on-the-fly created using the following equation where the scalar parameters are dynamically updated from the slider controls.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://render.githubusercontent.com/render/math?math={  S^{model}  =\overline{S}%2B\sum_{i=0}^{k-1} \alpha^{i}  \E^i}">
 
@@ -95,7 +95,7 @@ When executed, the EXE performs the following:
 1) The software won't display the main dialog box until the above steps are complete, so it may appear not to start up right away.
 2) Normally the sample meshes (location in the 'meshes' folder) used to create the model are scanned from real faces. In this case it wasn't practical to do this, and the meshes were createed using [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction). The images from which the meshes were created were aligned (with respect to eyes, nose...) to produce better results. See [here](https://www.youtube.com/watch?v=OaCmD08xxGw) why alignment of the meshes is important.
 3) Production quality 3D Morphable Models of human faces typically seperate shape from facial expressions and have a set of eigenvectors for both. Some also include a third set for texture of the face. 
-4) Finally, I have not attempted to optimize the performance calculations (via threading, vectorization, cache coherency etc) and I apologize for using a legacy version of DirectX!!
+4) Finally, I have not attempted to optimize the performance calculations (via threading, vectorization, cache coherency etc).
 
 
 
