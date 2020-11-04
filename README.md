@@ -31,7 +31,7 @@ If we subtract the average from each mesh
 
 <img src="https://render.githubusercontent.com/render/math?math={ \bigtriangleup S^i=(S^i -\overline{S}) }">
 
-then new models are expressed as the mean plus a linear combination of the m shape vectors:
+then new models can be expressed as the mean plus a linear combination of the m shape delta vectors:
 
 <img src="https://render.githubusercontent.com/render/math?math={  S^{model}  =\overline{S}%2B\sum_{i=0}^{m-1} \alpha^{i}  \bigtriangleup S^i}">
 
