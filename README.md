@@ -95,7 +95,7 @@ When executed, the EXE performs the following:
 1) The software won't display the main dialog box until the above steps are complete, so it may appear not to start up right away.
 2) Normally the sample meshes (location in the 'meshes' folder) used to create the model are scanned from real faces. In this case it wasn't practical to do this, and the meshes were createed using [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction). The images from which the meshes were created were aligned (with respect to eyes, nose...) to produce better results. See [here](https://www.youtube.com/watch?v=OaCmD08xxGw) why alignment of the meshes is important.
 3) Production quality 3D Morphable Models of human faces typically seperate shape from facial expressions and have a set of eigenvectors for both. Some also include a third set for texture of the face. 
-4) Fianlly. I have not attempted to optimize the eprformance (via threading, vectorizeation, cache coherency etc) and I oplogize for using a legacy version of DirectX!!
+4) Finally, I have not attempted to optimize the performance calculations (via threading, vectorization, cache coherency etc) and I apologize for using a legacy version of DirectX!!
 
 
 
