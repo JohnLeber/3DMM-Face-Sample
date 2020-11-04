@@ -8,6 +8,11 @@
 
 Deep Neural Networks (DNNs) that take as an input a 2D image of a human face and output a 3D mesh (e.g. Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction)) often incorporate a 3D Morphable Face Model (3DMM) in their pipeline. One such example is [Basel](https://faces.dmi.unibas.ch/bfm/) as used by [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction). When encountering such a DNN for the first time, one might expect that the mesh, which consists of vertices and indices, is perhaps output directly by the final layer of the DNN (the basel face mesh used in Deep3DFaceReconstruction has over 70,000 triangles). This is turns out not to be true however. Below we look at what exactly a 3DMM is, and how it is used in face recosntruction/mesh creation DNNs.
 
+**Discussion** 
+
+3 3DMM is created by scanning multiple faces e.g. using a 
+
+
 Each mesh is represented as a series of shape vectors:
 
 <img src="https://render.githubusercontent.com/render/math?math={S^0,%20S^1%20%20%20...%20%20%20S^{m-1} }">
