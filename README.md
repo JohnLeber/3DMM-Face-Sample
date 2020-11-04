@@ -13,7 +13,7 @@ Deep Neural Networks (DNNs) that perform Face Reconstruction (e.g. Microsoft's [
 
 **Discussion** 
 
-The first step in creating a 3DMM of a human face is to obtain a large number of 3D scans of faces. In the case of the 2009 Basel model, 100 male faces and 100 females faces were used. These are then converted into 3D meshes (consisting of vertices and indexes). Once acquired, each mesh is represented as a series of shape vectors:
+The first step in creating a 3DMM of a human face is to obtain a large number of 3D scans of faces. In the case of the [2009 Basel model](https://faces.dmi.unibas.ch/bfm/index.php?nav=1-0&id=basel_face_model), 100 male faces and 100 females faces were used. These are then converted into 3D meshes (consisting of vertices and indexes). Once acquired, each mesh is represented as a series of shape vectors:
 
 <img src="https://render.githubusercontent.com/render/math?math={S^0,%20S^1%20%20%20...%20%20%20S^{m-1} }">
 
