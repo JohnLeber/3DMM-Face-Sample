@@ -8,7 +8,7 @@
 
 Deep Neural Networks (DNNs) that perform Face Reconstruction (e.g. Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction)), or that take a 2D image of a human face and output a 3D mesh, often include a 3D Morphable Face Model (3DMM) as part of their pipeline. The purpose of this project was to help gain a practical understanding of 3DMMs when used in this context. Specifcally, when I downloaded and sarted to use Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction) the following questions came to mind:
 1) What exactly is a 3DMM?
-2) How does the DNN output the mesh. If the face mesh has 70,000+ vertices, does this mean the last layer of the DNN has this many outputs (no, as it turns out).
+2) How does the DNN output the mesh? If the face mesh has 70,000+ vertices, does this mean the last layer of the DNN has this many outputs? (no, as it turns out).
 3) How are 3DMMs stored in files?
 
 What follows is an attempt to answer these questions by creating a DirectX/C++ application that demonstrates how to construct and render a 3D Morphable Model (3DMM) of a human Face. An option to export the model is provided along with sample code for loading the model into Matlab.
@@ -57,7 +57,7 @@ The second image shows the change in the mesh when the first slider (first princ
 
 The following conclusions can be drawn from the above analysis:
 
-&nbsp;&nbsp;1) A DNN that produces a face mesh as its output just needs to return a vector of scalars that are then applied to the 3DMM to produce the actual mesh.
+&nbsp;&nbsp;1) A DNN that produces a face mesh as its output just needs to return a vector of k scalars that are then applied to the 3DMM to produce the actual mesh.
 
 &nbsp;&nbsp;<img src="https://render.githubusercontent.com/render/math?math={\alpha  =  \begin{bmatrix}   \alpha_{0}   \\ \vdots  \\\alpha_{k-1}\\   \end{bmatrix}  }">
 
@@ -65,7 +65,7 @@ The following conclusions can be drawn from the above analysis:
 
 - k eigenvectors, each of length n where n is the number of vertices of the face mesh.
  
-- the average/mean face mesh also of dimension n.
+- the average/mean face mesh (also of dimension n).
  
 - indices that will apply to vertices to form the actual triangles.
  
@@ -73,7 +73,7 @@ The following conclusions can be drawn from the above analysis:
 ## Building the software
 
 1) The software was built using [Visual Studio 2019 community edition](https://visualstudio.microsoft.com/downloads/). Be sure to install the MFC module.
-2) It requires DirectX 9 [June 2010 DirectX SDK ](https://www.microsoft.com/en-nz/download/details.aspx?id=6812)
+2) It requires the DirectX 9 [June 2010 DirectX SDK ](https://www.microsoft.com/en-nz/download/details.aspx?id=6812)
 3) The software uses the [Eigen library](http://eigen.tuxfamily.org/index.php?title=Main_Page) to perform the SVD. To install Eigen, navigate to the C drive and clone it from github:
 
 &nbsp;&nbsp;&nbsp;&nbsp;`cd C:\`
