@@ -14,7 +14,7 @@ Each shape is represented as a column vector with n vertices:
 
 <img src="https://render.githubusercontent.com/render/math?math={S^{i} =  \begin{bmatrix}   x^{i}_{0}   \\ \vdots  \\x_{n-1}\\y^{i}_{0}   \\ \vdots  \\y_{n-1}\\z^{i}_{0}   \\ \vdots  \\z_{n-1}  \end{bmatrix}  \in  \Re ^{3n}}">
 
-where the mean/average emesh is defined as: 
+where the mean/average mesh is defined as: 
 
 <img src="https://render.githubusercontent.com/render/math?math={\overline{S} =   \frac{1}{m} \sum_{i=0}^{m-1} S^i %20}">
 
@@ -31,7 +31,8 @@ The dimensionality of the system is m but we can use Principle Component Analysi
 <img src="https://render.githubusercontent.com/render/math?math={  S^{model}  =\overline{S}%2B\sum_{i=0}^{k-1} \alpha^{i}  \bigtriangleup E^i}">
 
 where k is the new dimension (hopefully significantly smaller than m) and E represents the Eigenvectors returned from the Singular Value Decomposition (SVD) method that we use to perform the Principle Component Analysis.
-In the demo application the Meshes folder includes 204 face meshes and so we have m=204. In the image below, it nca be seen that
+
+In the demo application, the Meshes folder includes 204 face meshes and so we have m = 204. After performing SVD on these meshes, only the first 20 are included and the rest are discarded, so we have k=20. In the image below
 
 
 ![alt text](https://github.com/nodecomplete/3DMM-Face-Sample/blob/master/FaceMorph/ScreenShot2.jpg)
