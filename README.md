@@ -37,14 +37,21 @@ In the demo application, the Meshes folder includes 204 face meshes and so we ha
 <img src="https://render.githubusercontent.com/render/math?math={\alpha^{i},  %20%20%20%20  \0 \leq  i < k}">
  
 The image below shows theses scalars set to zero, so the image displayed is the average/mean face. The second image shows the change in the mesh when the first slider (first principle component) is non-zero.
-
-
-<img src="https://render.githubusercontent.com/render/math?math={\alpha  =  \begin{bmatrix}   \alpha_{0}   \\ \vdots  \\\alpha_{k-1}\\   \end{bmatrix}  }">
+ 
 
 ![alt text](https://github.com/nodecomplete/3DMM-Face-Sample/blob/master/FaceMorph/ScreenShot2.jpg)
 
 [comment]: <> (<img src="https://render.githubusercontent.com/render/math?math={\bigtriangleup S=\begin{bmatrix} \vdots   \\ {\bigtriangleup S^0  \bigtriangleup S^1  \ldots  \bigtriangleup S^{m-1}} \\ {\vdots  } \\ \end{bmatrix}}">)
  
 ![alt text](https://github.com/nodecomplete/3DMM-Face-Sample/blob/master/FaceMorph/ScreenShot.jpg)
+
+The point of this analysis is to draw the following two conclusions:
+
+1) A DNN that produdces a face mesh as its output, just needs to return a vector of scalars that are then applied to the 3DMM to produce the actual mesh.
+<img src="https://render.githubusercontent.com/render/math?math={\alpha  =  \begin{bmatrix}   \alpha_{0}   \\ \vdots  \\\alpha_{k-1}\\   \end{bmatrix}  }">
+
+2) A 3DMM of a human face consists of k Eigenvectors each of length n where n is the number of vertices of the face mesh. It will also consists of the average.mean face mesh.
+
+ 
 
 
