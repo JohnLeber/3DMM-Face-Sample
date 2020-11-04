@@ -4,7 +4,7 @@
 
 ![alt text](https://github.com/nodecomplete/3DMM-Face-Sample/blob/master/FaceMorph/Faces.jpg)
 
-**Introduction** 
+##Introduction
 
 Deep Neural Networks (DNNs) that perform Face Reconstruction (e.g. Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction)), or that take a 2D image of a human face and output a 3D mesh, often include a 3D Morphable Face Model (3DMM) as part of their pipeline. The purpose of this project was to help gain a practical understanding of 3DMMs when used in this context. Specifcally, when I downloaded Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction) the following questions came to mind:
 1) What exactly is a 3DMM?
@@ -13,7 +13,7 @@ Deep Neural Networks (DNNs) that perform Face Reconstruction (e.g. Microsoft's [
 
 What follows is an attempt to answer these questions by creating a DirectX/C++ application that demonstrates how to construct and render a 3D Morphable Model (3DMM) of a human Face. An option to export the model is provided along with sample code for loading the model into Matlab.
 
-**Discussion** 
+##Discussion
 
 The first step in creating a 3DMM of a human face is to obtain a large number of 3D scans of faces. In the case of the [2009 Basel model](https://faces.dmi.unibas.ch/bfm/index.php?nav=1-0&id=basel_face_model), 100 male faces and 100 females faces were used. These are then converted into 3D meshes (consisting of vertices and indexes). Once acquired, each mesh is represented as a series of shape vectors:
 
@@ -70,7 +70,7 @@ The following conclusions can be drawn from the above analysis:
 - indices that will apply to vertices to form the actual triangles.
  
  
-**Building the software** 
+##Building the software
 
 1) The software was built using [Visual Studio 2019 community edition](https://visualstudio.microsoft.com/downloads/). Be sure to install the MFC module.
 2) It requires DirectX 9 [June 2010 DirectX SDK ](https://www.microsoft.com/en-nz/download/details.aspx?id=6812)
@@ -81,7 +81,7 @@ The following conclusions can be drawn from the above analysis:
 &nbsp;&nbsp;&nbsp;&nbsp;`git clone https://gitlab.com/libeigen/eigen.git`
  
  
-**Running the software** 
+##Running the software
 
 When starting the software, the following steps are performed:
 1) Loads the sample nmeshes from the 'meshes' folder 
@@ -93,7 +93,7 @@ When starting the software, the following steps are performed:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://render.githubusercontent.com/render/math?math={  S^{model}  =\overline{S}%2B\sum_{i=0}^{k-1} \alpha^{i}  \E^i}">
 
 
-**Additional Notes**
+##Additional Notes
 
 1) The software won't display the main dialog box until the above steps are complete, so it may appear not to start up right away.
 2) Normally the sample meshes (location in the 'meshes' folder) used to create the model are scanned from real faces. In this case it wasn't practical to do this, and the meshes were createed using [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction). The images from which the meshes were created were aligned (with respect to eyes, nose...) to produce better results. See [here](https://www.youtube.com/watch?v=OaCmD08xxGw) why alignment of the meshes is important.
