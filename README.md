@@ -47,11 +47,11 @@ The image below shows theses scalars set to zero, so the image displayed is the 
 
 The following conclusions can be drawn from the above analysis:
 
-1) A DNN that produces a face mesh as its output just needs to return a vector of scalars that are then applied to the 3DMM to produce the actual mesh.
+&nbsp;&nbsp;1) A DNN that produces a face mesh as its output just needs to return a vector of scalars that are then applied to the 3DMM to produce the actual mesh.
 
-   <img src="https://render.githubusercontent.com/render/math?math={\alpha  =  \begin{bmatrix}   \alpha_{0}   \\ \vdots  \\\alpha_{k-1}\\   \end{bmatrix}  }">
+&nbsp;&nbsp;<img src="https://render.githubusercontent.com/render/math?math={\alpha  =  \begin{bmatrix}   \alpha_{0}   \\ \vdots  \\\alpha_{k-1}\\   \end{bmatrix}  }">
 
-2) A 3DMM of a human face consists of the following:
+&nbsp;&nbsp;2) A 3DMM of a human face consists of the following:
 
 - k eigenvectors, each of length n where n is the number of vertices of the face mesh.
  
