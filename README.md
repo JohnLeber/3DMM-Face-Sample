@@ -60,7 +60,13 @@ The following conclusions can be drawn from the above analysis:
 - indices that will apply to vertices to form the actual triangles.
  
  
+**Building the software** 
 
+1) The software was built using [Visual Studio 2019 community edition](https://visualstudio.microsoft.com/downloads/). Be sure to install the MFC module.
+2) [June 2010 DirectX SDK ](https://www.microsoft.com/en-nz/download/details.aspx?id=6812)
+3) The software uses the [Eigen library](http://eigen.tuxfamily.org/index.php?title=Main_Page) to perform the SVD. To install Eigen, navigate to the C drive 
+`cd C:\`
+`git clone https://gitlab.com/libeigen/eigen.git`
  
 
 
