@@ -546,21 +546,4 @@ void CFaceMorphDlg::OnBnClickedExport()
 		AfxMessageBox(L"Could not save file");
 		return;
 	}
-	//To load this into matlab using a .,m file, something along the following should work
-	//fid = fopen('C:\_3DMMExport\MeanFace.dat');
-	//avgFace = [];
-	//while ~feof(fid)
-	//	tline = fgetl(fid);
-	//avgFace = [avgFace; sscanf(tline(1:end), '%f')']; 
-	//	end
-	//	fclose(fid);
-	//fid = fopen('C:\_3DMMExport\Eigen.dat');
-	//egn = [length(avgFace), 20];
-	//k = 1;
-	//while ~feof(fid)
-	//	tline = fgetl(fid);
-	//egn(k, 1:20) = sscanf(tline(1:end), '%f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f');
-	//k = k + 1;
-	//end
-	//	fclose(fid);
 }

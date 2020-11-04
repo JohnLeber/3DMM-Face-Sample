@@ -52,7 +52,8 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 	CDxWnd* m_pRenderWnd;
 	CEigenValues m_Scalars;
- 
+	bool CalcEigenValues(CString strMeshPath);
+	bool DoesDirExist(CString str);
 // Implementation
 protected: 
 	void OnTimer(UINT_PTR nIdEvent); 
@@ -72,5 +73,6 @@ public:
 	afx_msg void OnClose();
 	afx_msg void OnBnClickedReset();
 	afx_msg void OnBnClickedCheck1();
+	afx_msg void OnBnClickedExport();
 };
 //--------------------------------------------------------------------------------------------------//

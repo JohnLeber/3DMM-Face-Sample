@@ -13,21 +13,23 @@ public:
 	void Render();
 	void ShutDown();
 	void RecalcMesh(CEigenValues& e);
+public:
+	std::vector<float> m_AveFace;
+	std::vector<float> m_Mesh;
+	std::vector<std::vector<float> > m_Eigen;
+	std::vector<long> m_vIndices;
+	long m_nNumVertices;
 protected:
 	IDirect3DVertexBuffer9* m_pVB;
 	IDirect3DIndexBuffer9*  m_pIB;
-	bool CalcEigenValues(CString strMeshPath);
+	//bool CalcEigenValues(CString strMeshPath);
 	
 	// the next two functions were used for loading precompted data using Matlab.
 	void LoadEigenValues();
 	void LoadMeanFace();
-	long m_nNumVertices;
+ 
 	 
-	std::vector<float> m_AveFace;
-	std::vector<float> m_Mesh; 
-
-	std::vector<std::vector<float> > m_Eigen;
-	std::vector<long> m_vIndices;
+	 
 
 	HRESULT DrawTransformedQuad(LPDIRECT3DDEVICE9 pDevice,
 		FLOAT x, FLOAT y, FLOAT z,
