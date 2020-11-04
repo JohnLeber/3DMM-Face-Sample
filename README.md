@@ -70,5 +70,11 @@ The following conclusions can be drawn from the above analysis:
 
 &nbsp;&nbsp;&nbsp;&nbsp;`git clone https://gitlab.com/libeigen/eigen.git`
  
+**Running the software** 
 
+When executed, the EXE performs the following:
+1) loads the sample nmeshes from the 'meshes' folder 
+2) Calculates the average mesh by adding all vertices and dividing by the total number of meshes
+3) subtracts the average mesh from each of the meshes
+4) Calculates the eigenvectors using the Eigen libraries 
 
