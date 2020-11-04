@@ -78,3 +78,9 @@ When executed, the EXE performs the following:
 3) subtracts the average mesh from each of the meshes
 4) Calculates the eigenvectors using the Eigen libraries 
 
+Additional Notes:
+1) the software won't display the main dialog box until the above steps are done, so it may appear not to startup right away.
+2) normally the collections of meshes (location in the 'meshes' folder) used to create the model are scanned from real faces. In this case it wasn't practical to do this, and the meshes were createed using Deep3DFaceRecongition. The images from which the meshes were created were aligned (with respect to eyes, nose...) to produces better results.
+
+
+
