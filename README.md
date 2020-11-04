@@ -26,7 +26,7 @@ then new models are expressed as the mean plus a linear combination of the m sha
 
 <img src="https://render.githubusercontent.com/render/math?math={  S^{model}  =\overline{S}%2B\sum_{i=0}^{m-1} \alpha^{i}  \bigtriangleup S^i}">
 
-The dimensionality of the system is m but we can use [Principle Component Analysis])https://en.wikipedia.org/wiki/Principal_component_analysis_ to determine a new set of basis vectors for the system such that the most dominant components are included first and the rest can be ignored. i.e.
+The dimensionality of the system is m but we can use [Principle Component Analysis](https://en.wikipedia.org/wiki/Principal_component_analysis) to determine a new set of basis vectors for the system such that the most dominant components are included first and the rest can be ignored. i.e.
 
 <img src="https://render.githubusercontent.com/render/math?math={  S^{model}  =\overline{S}%2B\sum_{i=0}^{k-1} \alpha^{i}  \E^i}">
 
