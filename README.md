@@ -1,6 +1,6 @@
 # 3DMM-Face-Sample
 
->**Note**: The purpose of this project was to help me understand what 3D Morphable Models (3DMM) are and how they are used with face reconstruction DNNs. While it can be used to create a 3DMM of a human face, it is unlikely that the approach used will result a production quality 3DMM that would be useful for research or commercial use. Consider what follows to be of education value only.
+>**Note**: The purpose of this project was to help me understand what 3D Morphable Models (3DMM) are and how they are used with face reconstruction DNNs. While it can be used to create a 3DMM of a human face, it is unlikely that the approach used will result in a production quality 3DMM that would be suitable for research or commercial use. Consider what follows to be of education value only.
 
 ![alt text](https://github.com/nodecomplete/3DMM-Face-Sample/blob/master/FaceMorph/Faces.jpg)
 
