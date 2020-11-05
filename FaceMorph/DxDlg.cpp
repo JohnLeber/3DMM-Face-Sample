@@ -433,8 +433,8 @@ void CDxWnd::Render()
 	RECT rClient;
 	GetClientRect(&rClient);
  
-	D3DXCOLOR c1(0.2, 0.2, 0.2, 1.0);
-	D3DXCOLOR c2(0.45, 0.45, 0.45, 1.0);
+	D3DXCOLOR c1(0.2f, 0.2f, 0.2f, 1.0f);
+	D3DXCOLOR c2(0.45f, 0.45f, 0.45f, 1.0f);
 	g_pD3DDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
 	DrawTransformedQuad(g_pD3DDevice, -0.5f, -0.5f, 0.f,
 		(FLOAT)(rClient.right - rClient.left),
@@ -541,12 +541,23 @@ HRESULT CDxWnd::OnCreateDevice()
 	else
 	{
 		strFileName = CString(szFilePath);
-		long nRight = strFileName.ReverseFind(_T('\\'));
-		strFileName = strFileName.Left(nRight);
-		//if running otuside of VS, the next few lines will need to change.
-		strFileName.Replace(L"\\Debug", L"");
-		strFileName.Replace(L"\\Release", L"");
-		strFileName.Append(_T("\\FaceMorph\\FaceMorph.fx"));
+		bool bFoundFX = false;
+		int nNumAttempts = 0;
+		//search for the .fx file. Might be better to embed it as a resource
+		while (!bFoundFX && nNumAttempts < 3)
+		{
+			long nRight = strFileName.ReverseFind(_T('\\'));//move one folder up
+			strFileName = strFileName.Left(nRight);
+			nNumAttempts++;
+			if (DoesFileExist(strFileName + L"\\FaceMorph.fx")) {
+				bFoundFX = true;
+				strFileName.Append(L"\\FaceMorph.fx");
+			}
+			else if (DoesFileExist(strFileName + L"\\FaceMorph\\FaceMorph.fx")) {
+				bFoundFX = true;
+				strFileName.Append(L"\\FaceMorph\\FaceMorph.fx");
+			}
+		} 
 	}
 	// Load the effect from file.
 	LPD3DXBUFFER pErrors = NULL;
@@ -590,6 +601,26 @@ HRESULT CDxWnd::OnCreateDevice()
 
 
 	return S_OK;
+}
+//---------------------------------------------------------------//
+bool CDxWnd::DoesFileExist(CString strFile)
+{
+	GetFileAttributes(strFile); // from winbase.h
+	DWORD dwError = GetLastError();
+	if (INVALID_FILE_ATTRIBUTES == GetFileAttributes(strFile) && (
+		dwError == ERROR_FILE_NOT_FOUND || 
+		dwError == ERROR_PATH_NOT_FOUND ||
+		dwError == ERROR_INVALID_NAME ||
+		dwError == ERROR_INVALID_DRIVE ||
+		dwError == ERROR_NOT_READY ||
+		dwError == ERROR_INVALID_PARAMETER ||
+		dwError == ERROR_BAD_PATHNAME ||
+		dwError == ERROR_BAD_NETPATH))
+	{
+		//File not found
+		return false;
+	}
+	return true;
 }
 //---------------------------------------------------------------//
 void CDxWnd::ShutDown()

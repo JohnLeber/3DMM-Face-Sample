@@ -133,16 +133,36 @@ BOOL CFaceMorphDlg::OnInitDialog()
 	BOOL b2 = m_pRenderWnd->Create(NULL, _T("DxWnd"), WS_VISIBLE, rtFrame, this, 1);
 	 
 	//calculate the eigenvalues here and pass them to CDxDlg
+	//first we need to find the Meshess folder//
+	//This will be at a higher level. Recursively search until we find it
 	CString strMeshPath;
 	TCHAR szFilePath[MAX_PATH + _ATL_QUOTES_SPACE];
 	DWORD dwFLen = ::GetModuleFileName(NULL, szFilePath + 0, MAX_PATH);
 	strMeshPath = CString(szFilePath);
+
 	long nRight = strMeshPath.ReverseFind(_T('\\'));//remove exe name
 	strMeshPath = strMeshPath.Left(nRight);//this will ne the same folder as the EXe
-	nRight = strMeshPath.ReverseFind(_T('\\'));//move one folder up
-	strMeshPath = strMeshPath.Left(nRight);//this will ne the same folder as 
-	strMeshPath.Append(L"\\Meshes\\");
-	CalcEigenValues(strMeshPath);
+	bool bFoundMeshFolder = false;
+	int nNumAttempts = 0;
+	while (!bFoundMeshFolder && nNumAttempts < 3)
+	{
+		nRight = strMeshPath.ReverseFind(_T('\\'));//move one folder up
+		strMeshPath = strMeshPath.Left(nRight);//this will ne the same folder as 
+		nNumAttempts++;
+		if (DoesDirExist(strMeshPath + L"\\Meshes")) {
+			bFoundMeshFolder = true;
+			strMeshPath.Append(L"\\Meshes\\");
+		}		 
+		
+	}
+	if (bFoundMeshFolder)
+	{
+		CalcEigenValues(strMeshPath);
+	}
+	else
+	{
+		AfxMessageBox(L"Failed to find Mesh Folder");
+	}
 
 	// Draw the background gradient.
 	m_pRenderWnd->Initialize(this);
