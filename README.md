@@ -1,6 +1,6 @@
 # 3DMM Face Sample
 
->**Note**: This is part two of a two part project I assigned to myself to help me understand Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction) paper. [Click here for part one](https://github.com/nodecomplete/3D-Face-Frontalization).
+> This is part two of a two part project I assigned to myself to help me understand Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction) paper. [Click here for part one](https://github.com/nodecomplete/3D-Face-Frontalization).
 
 >**Note**: The purpose of this project was to help me understand what 3D Morphable Models (3DMM) are and how they are used with face reconstruction DNNs. While it can be used to create a 3DMM of a human face, it is unlikely that the approach used will result in a production quality 3DMM that would be suitable for research or commercial use. Consider what follows to be of education value only.
 
