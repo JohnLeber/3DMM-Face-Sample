@@ -15,7 +15,7 @@ Deep Neural Networks (DNNs) that perform Face Reconstruction (e.g. Microsoft's [
 
 What follows is an attempt to answer these questions by creating a DirectX/C++ application that demonstrates how to construct and render a 3D Morphable Model (3DMM) of a human Face. An option to export the model is provided along with sample code for loading the model into Matlab.
 
-## Discussion
+## Theory
 
 The first step in creating a 3DMM of a human face is to obtain a large number of 3D scans of faces. In the case of the [2009 Basel model](https://faces.dmi.unibas.ch/bfm/index.php?nav=1-0&id=basel_face_model), 100 male faces and 100 females faces were used. These scans are then converted into 3D meshes. Once acquired, each mesh is represented as a series of shape vectors:
 
