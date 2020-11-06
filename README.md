@@ -1,19 +1,21 @@
-# 3DMM-Face-Sample
+# 3DMM Face Sample
 
->**Note**: The purpose of this project was to help me understand what 3D Morphable Models (3DMM) are and how they are used with face reconstruction DNNs. While it can be used to create a 3DMM of a human face, it is unlikely that the approach used will result a production quality 3DMM that would be useful for research or commercial use. Consider what follows to be of education value only.
+> This is part two of a two part project I assigned to myself to help me understand Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction) paper. [Click here for part one](https://github.com/nodecomplete/3D-Face-Frontalization).
+
+>**Note**: The purpose of this project was to help me understand what 3D Morphable Models (3DMM) are and how they are used with face reconstruction DNNs. While it can be used to create a 3DMM of a human face, it is unlikely that the approach used will result in a production quality 3DMM that would be suitable for research or commercial use. Consider what follows to be of education value only.
 
 ![alt text](https://github.com/nodecomplete/3DMM-Face-Sample/blob/master/FaceMorph/Faces.jpg)
 
 ## Introduction
 
-Deep Neural Networks (DNNs) that perform Face Reconstruction (e.g. Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction)), or that take a 2D image of a human face and output a 3D mesh, often include a 3D Morphable Face Model (3DMM) as part of their pipeline. The purpose of this project was to help gain a practical understanding of 3DMMs when used in this context. Specifcally, when I downloaded and sarted to use Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction) the following questions came to mind:
+Deep Neural Networks (DNNs) that perform Face Reconstruction (e.g. Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction)), or that take a 2D image of a human face and output a 3D mesh, often include a 3D Morphable Face Model (3DMM) as part of their pipeline. The purpose of this project was to help gain a practical understanding of 3DMMs when used in this context. Specifcally, when I downloaded and started to use Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction) the following questions came to mind:
 1) What exactly is a 3DMM?
 2) How does the DNN output the mesh? If the face mesh has 70,000+ vertices, does this mean the last layer of the DNN has this many outputs? (no, as it turns out).
 3) How are 3DMMs stored in files?
 
 What follows is an attempt to answer these questions by creating a DirectX/C++ application that demonstrates how to construct and render a 3D Morphable Model (3DMM) of a human Face. An option to export the model is provided along with sample code for loading the model into Matlab.
 
-## Discussion
+## Theory
 
 The first step in creating a 3DMM of a human face is to obtain a large number of 3D scans of faces. In the case of the [2009 Basel model](https://faces.dmi.unibas.ch/bfm/index.php?nav=1-0&id=basel_face_model), 100 male faces and 100 females faces were used. These scans are then converted into 3D meshes. Once acquired, each mesh is represented as a series of shape vectors:
 
