@@ -21,11 +21,11 @@ jobs:
     steps:
       - name: checkout code
         uses: actions/checkout@v2
-        
+
       - name: checkout eigen
         uses: actions/checkout@master
         with:
-         name: libeigen/eigen 
+         repo: libeigen/eigen 
          ref: refs/libeigen/eigen
            
       # Activate cache
@@ -36,6 +36,7 @@ jobs:
           path: DXSDK
           key:  dxsdk-includes
        
+ 
        
       # Download DXSDK if needed, otherwise use cache
       # Only extract files that are required
