@@ -22,10 +22,11 @@ jobs:
       - name: checkout code
         uses: actions/checkout@v2
    
-      - name: checkout eigen
+      - name: checkout eigen 
         uses: actions/checkout@master
         with:
          repository: libeigen/eigen 
+         type: gitlab
          path: EigenPath
            
       # Activate cache
