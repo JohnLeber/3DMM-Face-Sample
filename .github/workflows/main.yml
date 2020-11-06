@@ -20,14 +20,13 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
-      - name:  Cache create      
+      - name:  Download DirectX      
         run:   |
                curl -s -o DXSDK_Jun10.exe --location https://download.microsoft.com/download/A/E/7/AE743F1F-632B-4809-87A9-AA1BB3458E31/DXSDK_Jun10.exe
                cmd.exe /c start /wait .\DXSDK_Jun10.exe /U /O /F /S /P "${{ github.workspace }}\DX_SDK"
-
+               
       - name: configure and build
+        uses: actions/checkout@v2
         env:
           DXSDK_DIR: '${{ github.workspace }}/DX_SDK'
         
