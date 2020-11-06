@@ -15,7 +15,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: windows-latest
+    runs-on: windows-2019
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -24,8 +24,9 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Build FaceMorph
-        run: cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"  
-             .\MSBuild.exe $Env:GITHUB_WORKSPACE\FaceMorph\FaceMorph.csproj
+        run: | 
+            cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"  
+            .\MSBuild.exe $Env:GITHUB_WORKSPACE\FaceMorph\FaceMorph.csproj
         
       # Runs a single command using the runners shell
       - name: Run a one-line script
