@@ -22,29 +22,29 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
         
-       # Activate cache
-       - name: Start DXSDK Cache
-         id:   dxcache
-         uses: actions/cache@v1
-         with:
+      # Activate cache
+      - name: Start DXSDK Cache
+        id:   dxcache
+        uses: actions/cache@v1
+        with:
           path: DXSDK
           key:  dxsdk-includes
        
-        # Download DXSDK if needed, otherwise use cache
-        # Only extract files that are required
-        - name:  Download DXSDK if needed
-          if:    steps.dxcache.outputs.cache-hit != 'true'
-          run:   |
+      # Download DXSDK if needed, otherwise use cache
+      # Only extract files that are required
+      - name: Download DXSDK if needed
+        if:    steps.dxcache.outputs.cache-hit != 'true'
+        run:   |
                  curl -L https://download.microsoft.com/download/a/e/7/ae743f1f-632b-4809-87a9-aa1bb3458e31/DXSDK_Jun10.exe -o _DX2010_.exe
                  7z x _DX2010_.exe DXSDK/Include/{audiodefs.h,comdecl.h,XAudio2.h,xma2defs.h}
                  rm -fR _DX*_ _DX*_.exe
-          shell: bash
-
+        shell: bash
+        
       # Runs a single command using the runners shell
       - name: Build FaceMorph
         run: | 
-            cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"  
-            .\MSBuild.exe $Env:GITHUB_WORKSPACE\FaceMorph\FaceMorph.vcxproj
+              cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"  
+              .\MSBuild.exe $Env:GITHUB_WORKSPACE\FaceMorph\FaceMorph.vcxproj
         env:
           DXSDK_DIR: ${{ github.workspace }}\DXSDK\
       
@@ -55,5 +55,5 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+            echo Add other actions to build,
+            echo test, and deploy your project.
