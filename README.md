@@ -1,4 +1,4 @@
-# 3DMM Face Sample
+# 3DMM Face Sample ![Build](https://github.com/nodecomplete/3DMM-Face-Sample/workflows/Build/badge.svg)
 
 > This is part two of a two part project I assigned to myself to help me understand Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction) paper. [Click here for part one](https://github.com/nodecomplete/3D-Face-Frontalization).
 
