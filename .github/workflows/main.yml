@@ -26,6 +26,7 @@ jobs:
         if:    steps.dxcache.outputs.cache-hit != 'true'
         run:   |
                  curl -L -O https://gitlab.com/libeigen/eigen/-/archive/3.3.8/eigen-3.3.8.zip
+                 unzip eigen-3.3.8.zip
         shell: bash
     
            
