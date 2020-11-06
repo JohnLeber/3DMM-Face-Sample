@@ -28,7 +28,7 @@ jobs:
       - name: Download Eigen 
         run:   |   
                  curl -L -O https://gitlab.com/libeigen/eigen/-/archive/3.3.8/eigen-3.3.8.zip
-                 unzip eigen-3.3.8.zip -d ./eigen3
+                 unzip eigen-3.3.8.zip -d ./eigen
         shell: bash
     
       - name: debug
