@@ -21,13 +21,13 @@ jobs:
     steps:
       - name: checkout code
         uses: actions/checkout@v2
-   
-      - name: checkout eigen 
-        uses: actions/checkout@master
-        with:
-         repository: libeigen/eigen 
-         type: gitlab
-         path: EigenPath
+        
+      - name: Download Eigen
+        if:    steps.dxcache.outputs.cache-hit != 'true'
+        run:   |
+                 curl -L -O https://gitlab.com/libeigen/eigen/-/archive/3.3.8/eigen-3.3.8.zip
+        shell: bash
+    
            
       # Activate cache
       - name: Start DXSDK Cache
