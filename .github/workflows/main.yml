@@ -25,21 +25,16 @@ jobs:
                curl -s -o DXSDK_Jun10.exe --location https://download.microsoft.com/download/A/E/7/AE743F1F-632B-4809-87A9-AA1BB3458E31/DXSDK_Jun10.exe
                cmd.exe /c start /wait .\DXSDK_Jun10.exe /U /O /F /S /P "${{ github.workspace }}\DX_SDK"
                
-      - name: configure and build
+      - name: configure
         uses: actions/checkout@v2
-        env:
-          DXSDK_DIR: '${{ github.workspace }}/DX_SDK'
-        
-      - name:  Config
-        run:   echo ::set-env name=DXSDK_DIR::$GITHUB_WORKSPACE/cache/
-        shell: bash
-        
+
       # Runs a single command using the runners shell
       - name: Build FaceMorph
         run: | 
             cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"  
             .\MSBuild.exe $Env:GITHUB_WORKSPACE\FaceMorph\FaceMorph.vcxproj
-        
+        env:
+          DXSDK_DIR: '${{ github.workspace }}\DX_SDK\'
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
