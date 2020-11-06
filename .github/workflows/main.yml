@@ -26,7 +26,7 @@ jobs:
         if:    steps.dxcache.outputs.cache-hit != 'true'
         run:   |
                  curl -L -O https://gitlab.com/libeigen/eigen/-/archive/3.3.8/eigen-3.3.8.zip
-                 unzip eigen-3.3.8.zip -d $Env:GITHUB_WORKSPACE
+                 unzip eigen-3.3.8.zip -d $Env:GITHUB_WORKSPACE\eigen
         shell: bash
     
            
@@ -54,7 +54,7 @@ jobs:
               cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"  
               .\MSBuild.exe $Env:GITHUB_WORKSPACE\FaceMorph\FaceMorph.vcxproj
         env:
-          EIGEN_DIR: ${{ github.workspace }}\eigen-3.3.8  
+          EIGEN_DIR: ${{ github.workspace }}\eigen  
           DXSDK_DIR: ${{ github.workspace }}\DXSDK\
          
                
