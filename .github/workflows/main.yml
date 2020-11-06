@@ -54,8 +54,9 @@ jobs:
               cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"  
               .\MSBuild.exe $Env:GITHUB_WORKSPACE\FaceMorph\FaceMorph.vcxproj
         env:
+          EIGEN_DIR: ${{ github.workspace }}\eigen-3.3.8  
           DXSDK_DIR: ${{ github.workspace }}\DXSDK\
-          EIGEN_DIR: ${{ github.workspace }}\eigen-3.3.8\
+         
                
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
