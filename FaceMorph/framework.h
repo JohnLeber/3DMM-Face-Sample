@@ -52,10 +52,9 @@ const int NUM_SLIDERS = 20;
 
 //#include <mkl.h>
 
-const long NUM_EIGENS = 20;
-
-const long SLIDER_CENTER = 20;
-const long NUM_TRIANGLES = 70789;
+constexpr long NUM_EIGENS = 20;
+constexpr long SLIDER_CENTER = 20;
+constexpr long NUM_TRIANGLES = 70789;
 struct CEigenValues
 {
 	CEigenValues()

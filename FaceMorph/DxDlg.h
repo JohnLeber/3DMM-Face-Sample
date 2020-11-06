@@ -22,11 +22,10 @@ public:
 protected:
 	IDirect3DVertexBuffer9* m_pVB;
 	IDirect3DIndexBuffer9*  m_pIB;
-	//bool CalcEigenValues(CString strMeshPath);
 	bool DoesFileExist(CString strFile);
 	// the next two functions were used for loading precompted data using Matlab.
-	void LoadEigenValues();
-	void LoadMeanFace();
+	//void LoadEigenValues();
+	//void LoadMeanFace();
  
 	 
 	 

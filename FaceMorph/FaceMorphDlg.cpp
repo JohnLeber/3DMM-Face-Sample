@@ -296,9 +296,13 @@ bool CFaceMorphDlg::CalcEigenValues(CString strMeshPath)
 	////////////////////////////////////////////////////////////////////////////////////////
 	//STEP TWO: calculate the mean/average face mesh
 	////////////////////////////////////////////////////////////////////////////////////////
-	for (std::vector<float>::iterator i = m_pRenderWnd->m_AveFace.begin(); i != m_pRenderWnd->m_AveFace.end(); ++i)
+	//for (std::vector<float>::iterator i = m_pRenderWnd->m_AveFace.begin(); i != m_pRenderWnd->m_AveFace.end(); ++i)
+	//{
+	//*i = i* / nNumFiles;
+	//}
+	for (auto& i : m_pRenderWnd->m_AveFace)
 	{
-		*i = *i / nNumFiles;
+		i = i / nNumFiles;
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////
@@ -311,6 +315,7 @@ bool CFaceMorphDlg::CalcEigenValues(CString strMeshPath)
 			vMeshes[h][j] = vMeshes[h][j] - m_pRenderWnd->m_AveFace[j];
 		}
 	}
+	
 
 	////////////////////////////////////////////////////////////////////////////////////////
 	//STEP FOUR: calculate the eigenvectors

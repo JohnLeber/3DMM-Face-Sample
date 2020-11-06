@@ -22,13 +22,13 @@ CDxWnd::CDxWnd()
 	m_pIB = nullptr;
 	g_hWnd = NULL;
 	g_hMainDlg = NULL;
-	g_pD3D = NULL;
-	g_pD3DDevice = NULL;
-	g_pTexture = NULL; 
+	g_pD3D = nullptr;
+	g_pD3DDevice = nullptr;
+	g_pTexture = nullptr;
 	g_fScale = 1.0f;
-	m_pVertexPNTDecl = 0; 
-	g_pEffect = NULL; 
-	m_pFaceMesh = NULL;  
+	m_pVertexPNTDecl = nullptr;
+	g_pEffect = nullptr;
+	m_pFaceMesh = nullptr;
 	m_hTech = NULL;
 	m_hWVP = NULL;
 	m_hWorldInvTrans = NULL;
@@ -95,265 +95,86 @@ bool CDxWnd::Initialize(CWnd* pParent)
 	}
 	return bResult;
 }  
-////---------------------------------------------------------------//
-//bool CDxWnd::CalcEigenValues(CString strMeshPath)
+//---------------------------------------------------------------//
+//void CDxWnd::LoadEigenValues()
 //{
-//	std::vector<std::vector<float> > vMeshes;
-//	 
-//	CFileFind finder;
-//	int nNumVertices = -1;
-//	int nI1 = 0;
-//	int nI2 = 0;
-//	int nI3 = 0;
-//
-//	////////////////////////////////////////////////////////////////////////////////////////
-//	//STEP ONE: load the files
-//	////////////////////////////////////////////////////////////////////////////////////////
-//	
-//	//count the number of files we will have to load
-//	int nNumFiles = 0;
-//	BOOL bWorking = finder.FindFile(strMeshPath + _T("*.mesh"));
-//	while (bWorking)
+//	/*CString strPath = L"D:\\_FacesInWirld\\_Eigenvalues\\_eigen.dat";
+//	FILE* pFile = 0;
+//	errno_t ret = _tfopen_s(&pFile, strPath, TEXT("r"));
+//	if (ret == 0)
 //	{
-//		bWorking = finder.FindNextFile();
-//		nNumFiles++; 
-//	}
-//	finder.Close();
-//	 
-//	int nFileCounter = 0;
-//	bWorking = finder.FindFile(strMeshPath + _T("*.mesh"));
-//	while (bWorking)
-//	{
-//		bWorking = finder.FindNextFile();
-//		if (!bWorking) {
-//			long ert = 0;
+//		int h = 0;
+//		m_Eigen.reserve(NUM_EIGENS);
+//		m_Eigen.resize(NUM_EIGENS);
+//		for (int h = 0; h < NUM_EIGENS; h++)
+//		{
+//			m_Eigen[h].reserve(NUM_EIGEN_ELEMENTS);
+//			m_Eigen[h].resize(NUM_EIGEN_ELEMENTS);
 //		}
-//		CString strPath = finder.GetFilePath();
+//		while (!feof(pFile))
+//		{
+//			CHAR buffer[LINE_BUFF_SIZE];
+//			fgets(buffer, LINE_BUFF_SIZE, pFile);
+//
+//			sscanf_s(buffer, "%f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f ",
+//				&m_Eigen[0][h], &m_Eigen[1][h], &m_Eigen[2][h], &m_Eigen[3][h], &m_Eigen[4][h],
+//				&m_Eigen[5][h], &m_Eigen[6][h], &m_Eigen[7][h], &m_Eigen[8][h], &m_Eigen[9][h],
+//				&m_Eigen[10][h], &m_Eigen[11][h], &m_Eigen[12][h], &m_Eigen[13][h], &m_Eigen[14][h],
+//				&m_Eigen[15][h], &m_Eigen[16][h], &m_Eigen[17][h], &m_Eigen[18][h], &m_Eigen[19][h]);
+//			h++;
+//		}
+//		fclose(pFile);
+//	}*/
+//}
+////---------------------------------------------------------------//
+//void CDxWnd::LoadMeanFace()
+//{
+//	{
+//		/*CString strPath = L"D:\\_FacesInWirld\\_Eigenvalues\\_aveface.dat";
 //		FILE* pFile = 0;
-//		int nCounter = 0;
-//		errno_t ret = _tfopen_s(&pFile, strPath, TEXT("r"));	 
+//		errno_t ret = _tfopen_s(&pFile, strPath, TEXT("r"));
 //		if (ret == 0)
-//		{ 
-//			//cound the vertices in advance and make sure they fit the vector
+//		{
+//			m_AveFace.clear();
+//			m_AveFace.reserve(NUM_EIGEN_ELEMENTS);
+//			m_AveFace.resize(NUM_EIGEN_ELEMENTS);
+//			int h = 0;
 //			while (!feof(pFile))
 //			{
 //				CHAR buffer[LINE_BUFF_SIZE];
 //				fgets(buffer, LINE_BUFF_SIZE, pFile);
-//				if (buffer[0] == 'v')
-//				{
-//					nCounter++;
-//				}				
+//				sscanf_s(buffer, "%f", &m_AveFace[h]);
+//				m_AveFace[h] = m_AveCalc[h];
+//				h++;
 //			}
-//			if (nNumVertices == -1)
-//			{
-//				nNumVertices = nCounter;
-//			} 
-//			else if (nNumVertices != nCounter)
-//			{
-//				fclose(pFile);
-//				AfxMessageBox(L"wrong size");
-//				return false;
-//			}
-//			if(nFileCounter == 0)
-//			{
-//				m_nNumVertices = nNumVertices;
-//				//we have enough info now to preallocate memory to avoid performance penalties caused by dynamic memory allocations...
-//				vMeshes.reserve(nNumFiles);
-//				vMeshes.resize(nNumFiles);
-//				for (int h = 0; h < nNumFiles; h++)
-//				{
-//					vMeshes[h].reserve(nNumVertices * 3);
-//					vMeshes[h].resize(nNumVertices * 3);
-//				}
-//				m_AveFace.reserve(nNumVertices * 3);
-//				m_AveFace.resize(nNumVertices * 3);
-//				m_Mesh.reserve(nNumVertices * 3);
-//				m_Mesh.resize(nNumVertices * 3);
-//			}
-//			rewind(pFile);
-//			int nIndex = 0;
-//			float x = 0;
-//			float y = 0;
-//			float z = 0;
+//			fclose(pFile);
+//		}*/
+//		//m_AveFace = m_AveCalc;
+//	}
+//	/*{
+//		CString strPath = L"D:\\_FacesInWirld\\triangles.dat";
+//		FILE* pFile = 0;
+//		errno_t ret = _tfopen_s(&pFile, strPath, TEXT("r"));
+//		if (ret == 0)
+//		{
+//			m_vIndices.clear();
+//			m_vIndices.reserve(NUM_TRIANGLES * 3);  
 //			while (!feof(pFile))
 //			{
+//				INT nI1 = 0;
+//				INT nI2 = 0;
+//				INT nI3 = 0;
 //				CHAR buffer[LINE_BUFF_SIZE];
 //				fgets(buffer, LINE_BUFF_SIZE, pFile);
-//				if (0 == strncmp("v ", buffer, 2))
-//				{
-//					//load vertices into the vectors
-//					sscanf_s(buffer + 1, "%f %f %f", &x, &y, &z);
-//					m_AveFace[nIndex] += x;
-//					m_AveFace[nIndex + nNumVertices] +=y;
-//					m_AveFace[nIndex + 2 * nNumVertices] += z;
-//					vMeshes[nFileCounter][nIndex] = x;
-//					vMeshes[nFileCounter][nIndex + nNumVertices] = y;
-//					vMeshes[nFileCounter][nIndex + 2 * nNumVertices] = z;
-//					nIndex++;
-//				}
-//				else if (nFileCounter == 0 && 0 == strncmp("f ", buffer, 2))
-//				{
-//					//load face information (list of three points forming a triangle). Do it for the first mesh only as the rest should be the same
-//					sscanf_s(buffer + 1, "%d %d %d", &nI1, &nI2, &nI3);
-//					m_vIndices.push_back(nI1 - 1);
-//					m_vIndices.push_back(nI2 - 1);
-//					m_vIndices.push_back(nI3 - 1);
-//				}
+//				sscanf_s(buffer + 1, "%d %d %d", &nI1, &nI2, &nI3); 
+//				m_vIndices.push_back(nI1 - 1);
+//				m_vIndices.push_back(nI2 - 1);
+//				m_vIndices.push_back(nI3 - 1);
 //			}
-//			nFileCounter++;
 //			fclose(pFile);
 //		}
-//	}
-//	finder.Close();
-//
-//	////////////////////////////////////////////////////////////////////////////////////////
-//	//STEP TWO: calculate the mean/average face mesh
-//	////////////////////////////////////////////////////////////////////////////////////////
-//	for (std::vector<float>::iterator i = m_AveFace.begin(); i != m_AveFace.end(); ++i)
-//	{
-//		*i = *i / nNumFiles;
-//	}
-//
-//	////////////////////////////////////////////////////////////////////////////////////////
-//	//STEP THREE: subtract the mean from each face mesh
-//	////////////////////////////////////////////////////////////////////////////////////////
-//	for (int h = 0; h < nNumFiles; h++)
-//	{
-//		for (int j = 0; j < nNumVertices * 3; j++)
-//		{
-//			vMeshes[h][j] = vMeshes[h][j] - m_AveFace[j];
-//		}
-//	}
-//
-//	////////////////////////////////////////////////////////////////////////////////////////
-//	//STEP FOUR: calculate the eigenvectors
-//	////////////////////////////////////////////////////////////////////////////////////////
-//	MatrixXf X(nNumVertices * 3, nNumFiles);
-//	for (int h = 0; h < nNumFiles; h++)
-//	{
-//		for (int j = 0; j < nNumVertices * 3; j++)
-//		{
-//			X(j, h) = vMeshes[h][j];
-//		}
-//	}
-//
-//	//Use Principle Component Analysis. SVD routine in the Eigen library to do this
-//	JacobiSVD<MatrixXf> svd(X, ComputeThinU | ComputeThinV); 
-//	MatrixXf U = svd.matrixU();
-//	MatrixXf V = svd.matrixV();
-//	VectorXf s = svd.singularValues();
-//	int rows = s.rows();
-//	int columns = s.cols();
-//
-//	//the following should give us an idea of which/how manu eigencvectors are important.
-//	for (int h = 0; h < rows; h++)
-//	{
-//		ATLTRACE2(L"s(%d) = %f\n", h + 1, s(h));
-//	}
-//	if (rows < NUM_EIGENS)
-//	{
-//		CString strMsg;
-//		strMsg.Format(L"Not enough eigenvectors found. We need at least %d. Please increase the number of meshes and restart the application.", NUM_EIGENS);
-//		AfxMessageBox(strMsg);
-//		return false;
-//	}
-//	  
-//	//There will be nNumFiles eigenvectors, but only take the first 20 (NUM_EIGENS)
-//	m_Eigen.reserve(NUM_EIGENS);
-//	m_Eigen.resize(NUM_EIGENS);
-//	for (int h = 0; h < NUM_EIGENS; h++)
-//	{
-//		m_Eigen[h].reserve(nNumVertices * 3);
-//		m_Eigen[h].resize(nNumVertices * 3);
-//		for (int j = 0; j < nNumVertices * 3; j++)
-//		{
-//			m_Eigen[h][j] = U(j, h);
-//		}
-//	} 
-//	//We now have the eignevectors. The mesh that is rendered will be the average/mean mesh plus a linesy combintation of the 
-//	//the eignevector meshes (m_Eigen). That is each eignevector is multipled by the scalar correpnding to each slider in the UI.
-//	return true;
+//	}*/
 //}
-//---------------------------------------------------------------//
-void CDxWnd::LoadEigenValues()
-{
-	/*CString strPath = L"D:\\_FacesInWirld\\_Eigenvalues\\_eigen.dat";
-	FILE* pFile = 0;
-	errno_t ret = _tfopen_s(&pFile, strPath, TEXT("r"));
-	if (ret == 0)
-	{
-		int h = 0;
-		m_Eigen.reserve(NUM_EIGENS);
-		m_Eigen.resize(NUM_EIGENS);
-		for (int h = 0; h < NUM_EIGENS; h++)
-		{
-			m_Eigen[h].reserve(NUM_EIGEN_ELEMENTS);
-			m_Eigen[h].resize(NUM_EIGEN_ELEMENTS);
-		}
-		while (!feof(pFile))
-		{
-			CHAR buffer[LINE_BUFF_SIZE];
-			fgets(buffer, LINE_BUFF_SIZE, pFile);
-
-			sscanf_s(buffer, "%f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f ",
-				&m_Eigen[0][h], &m_Eigen[1][h], &m_Eigen[2][h], &m_Eigen[3][h], &m_Eigen[4][h],
-				&m_Eigen[5][h], &m_Eigen[6][h], &m_Eigen[7][h], &m_Eigen[8][h], &m_Eigen[9][h],
-				&m_Eigen[10][h], &m_Eigen[11][h], &m_Eigen[12][h], &m_Eigen[13][h], &m_Eigen[14][h],
-				&m_Eigen[15][h], &m_Eigen[16][h], &m_Eigen[17][h], &m_Eigen[18][h], &m_Eigen[19][h]);
-			h++;
-		}
-		fclose(pFile);
-	}*/
-}
-//---------------------------------------------------------------//
-void CDxWnd::LoadMeanFace()
-{
-	{
-		/*CString strPath = L"D:\\_FacesInWirld\\_Eigenvalues\\_aveface.dat";
-		FILE* pFile = 0;
-		errno_t ret = _tfopen_s(&pFile, strPath, TEXT("r"));
-		if (ret == 0)
-		{
-			m_AveFace.clear();
-			m_AveFace.reserve(NUM_EIGEN_ELEMENTS);
-			m_AveFace.resize(NUM_EIGEN_ELEMENTS);
-			int h = 0;
-			while (!feof(pFile))
-			{
-				CHAR buffer[LINE_BUFF_SIZE];
-				fgets(buffer, LINE_BUFF_SIZE, pFile);
-				sscanf_s(buffer, "%f", &m_AveFace[h]);
-				m_AveFace[h] = m_AveCalc[h];
-				h++;
-			}
-			fclose(pFile);
-		}*/
-		//m_AveFace = m_AveCalc;
-	}
-	/*{
-		CString strPath = L"D:\\_FacesInWirld\\triangles.dat";
-		FILE* pFile = 0;
-		errno_t ret = _tfopen_s(&pFile, strPath, TEXT("r"));
-		if (ret == 0)
-		{
-			m_vIndices.clear();
-			m_vIndices.reserve(NUM_TRIANGLES * 3);  
-			while (!feof(pFile))
-			{
-				INT nI1 = 0;
-				INT nI2 = 0;
-				INT nI3 = 0;
-				CHAR buffer[LINE_BUFF_SIZE];
-				fgets(buffer, LINE_BUFF_SIZE, pFile);
-				sscanf_s(buffer + 1, "%d %d %d", &nI1, &nI2, &nI3); 
-				m_vIndices.push_back(nI1 - 1);
-				m_vIndices.push_back(nI2 - 1);
-				m_vIndices.push_back(nI3 - 1);
-			}
-			fclose(pFile);
-		}
-	}*/
-}
 //---------------------------------------------------------------//
 void CDxWnd::OnTimer(UINT_PTR nIDEvent)
 { 
@@ -391,6 +212,7 @@ void CDxWnd::RecalcMesh(CEigenValues& e)
 			{
 				k[j] = m_vIndices[j];
 			}
+
 			//compute normals (or at least approximate them)
 			for (int j = 0; j < nNumTriangles; j++)
 			{ 
