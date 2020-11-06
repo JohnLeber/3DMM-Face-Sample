@@ -26,10 +26,12 @@ jobs:
         if:    steps.dxcache.outputs.cache-hit != 'true'
         run:   |
                  curl -L -O https://gitlab.com/libeigen/eigen/-/archive/3.3.8/eigen-3.3.8.zip
-                 unzip eigen-3.3.8.zip -d $Env:GITHUB_WORKSPACE\\eigen
+                 unzip eigen-3.3.8.zip -d $Env:GITHUB_WORKSPACE
         shell: bash
     
-           
+      - name: debug
+        run: |
+            echo $Env:GITHUB_WORKSPACE   
       # Activate cache
       - name: Start DXSDK Cache
         id:   dxcache
@@ -55,7 +57,7 @@ jobs:
               .\MSBuild.exe $Env:GITHUB_WORKSPACE\FaceMorph\FaceMorph.vcxproj
         env:
           EIGEN_DIR: ${{ github.workspace }}\eigen  
-          DXSDK_DIR: ${{ github.workspace }}\DXSDK\
+          DXSDK_DIR: ${{ github.workspace }}\DXSDK
          
                
       # Runs a set of commands using the runners shell
