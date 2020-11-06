@@ -22,16 +22,16 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name:  Cache create
-        if:    steps.cache.outputs.cache-hit != 'true'
+      - name:  Cache create      
         run:   |
-               curl -L https://download.microsoft.com/download/a/e/7/ae743f1f-632b-4809-87a9-aa1bb3458e31/DXSDK_Jun10.exe -o _DX2010_.exe
-               7z x _DX2010_.exe DXSDK/Include -o_DX2010_
-               7z x _DX2010_.exe DXSDK/Lib/x86 -o_DX2010_
-               mv _DX2010_/DXSDK $HOME/cache
-               rm -fR _DX*_ _DX*_.exe
-        shell: bash
+               curl -s -o DXSDK_Jun10.exe --location https://download.microsoft.com/download/A/E/7/AE743F1F-632B-4809-87A9-AA1BB3458E31/DXSDK_Jun10.exe
+               cmd.exe /c start /wait .\DXSDK_Jun10.exe /U /O /F /S /P "${{ github.workspace }}\DX_SDK"
 
+      - name: configure and build
+        uses: actions/checkout@v2
+        env:
+          DXSDK_DIR: '${{ github.workspace }}/DX_SDK'
+        
       # Runs a single command using the runners shell
       - name: Build FaceMorph
         run: | 
