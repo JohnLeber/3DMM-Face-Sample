@@ -19,31 +19,25 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Start DXSDK Cache
-        id:   dxcache
-        uses: actions/cache@v1
-        with:
-         path: DXSDK
-         key:  dxsdk-includes
-       
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name:  Download DXSDK if needed
-        if:    steps.dxcache.outputs.cache-hit != 'true'
-        run:   |
-                curl -L https://download.microsoft.com/download/a/e/7/ae743f1f-632b-4809-87a9-aa1bb3458e31/DXSDK_Jun10.exe -o _DX2010_.exe
-                7z x _DX2010_.exe DXSDK/Include/{audiodefs.h,comdecl.h,XAudio2.h,xma2defs.h}
-                rm -fR _DX*_ _DX*_.exe
-        shell: bash             
       - name: configure
         uses: actions/checkout@v2
+       
+      - name: Cache create (DirectX)
+        run:  |
+              :
+              echo ::group::DX2010
+              curl -L https://download.microsoft.com/download/a/e/7/ae743f1f-632b-4809-87a9-aa1bb3458e31/DXSDK_Jun10.exe -o _DX2010_.exe
+              7z x _DX2010_.exe DXSDK/Include -o_DX2010_
+              7z x _DX2010_.exe DXSDK/Lib/x86 -o_DX2010_
+              mv _DX2010_/DXSDK $DXSDK_DIR
+              echo ::endgroup::  
+     
 
       # Runs a single command using the runners shell
       - name: Build FaceMorph
         run: | 
             cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"  
             .\MSBuild.exe $Env:GITHUB_WORKSPACE\FaceMorph\FaceMorph.vcxproj
-        env:
-          DXSDK_DIR: ${{ github.workspace }}\DX_SDK\
       
       # Runs a single command using the runners shell
       - name: Run a one-line script
