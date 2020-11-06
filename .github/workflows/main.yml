@@ -43,7 +43,8 @@ jobs:
             cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"  
             .\MSBuild.exe $Env:GITHUB_WORKSPACE\FaceMorph\FaceMorph.vcxproj
         env:
-          DXSDK_DIR: ${{ github.workspace }}\DX_SDK
+          DXSDK_DIR: ${{ github.workspace }}\DX_SDK\
+      
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
