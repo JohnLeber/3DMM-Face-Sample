@@ -19,9 +19,14 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: checkout
+      - name: checkout code
         uses: actions/checkout@v2
         
+      - name: checkout eigen
+        uses: actions/checkout@master
+        with:
+         name: libeigen/eigen 
+    
       # Activate cache
       - name: Start DXSDK Cache
         id:   dxcache
@@ -29,6 +34,7 @@ jobs:
         with:
           path: DXSDK
           key:  dxsdk-includes
+       
        
       # Download DXSDK if needed, otherwise use cache
       # Only extract files that are required
