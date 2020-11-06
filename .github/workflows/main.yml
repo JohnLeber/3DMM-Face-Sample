@@ -30,6 +30,10 @@ jobs:
         env:
           DXSDK_DIR: '${{ github.workspace }}/DX_SDK'
         
+      - name:  Config
+        run:   echo ::set-env name=DXSDK_DIR::$GITHUB_WORKSPACE/cache/
+        shell: bash
+        
       # Runs a single command using the runners shell
       - name: Build FaceMorph
         run: | 
