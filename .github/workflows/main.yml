@@ -24,7 +24,8 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: cd “C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\”  .\MSBuild.exe $Env:GITHUB_WORKSPACE\FaceMorph\FaceMorph.csproj
+        run: cd “C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\”  
+             .\MSBuild.exe $Env:GITHUB_WORKSPACE\FaceMorph\FaceMorph.csproj
         
       # Runs a single command using the runners shell
       - name: Run a one-line script
