@@ -4,11 +4,14 @@ name: Build
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: 
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '*/5 * * * *'
+  #push:
+   # branches: [ master ]
+ # pull_request:
+  #  branches: [ master ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -25,7 +28,7 @@ jobs:
       - name: Download Eigen 
         run:   |   
                  curl -L -O https://gitlab.com/libeigen/eigen/-/archive/3.3.8/eigen-3.3.8.zip
-                 unzip eigen-3.3.8.zip -d ./eigen
+                 unzip eigen-3.3.8.zip -d ./eigen3
         shell: bash
     
       - name: debug
