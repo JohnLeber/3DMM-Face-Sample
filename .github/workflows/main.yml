@@ -21,12 +21,12 @@ jobs:
     steps:
       - name: checkout code
         uses: actions/checkout@v2
-
+   
       - name: checkout eigen
         uses: actions/checkout@master
         with:
          repository: libeigen/eigen 
-         ref: refs/libeigen/eigen
+         path: EigenPath
            
       # Activate cache
       - name: Start DXSDK Cache
