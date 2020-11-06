@@ -76,11 +76,11 @@ The following conclusions can be drawn from the above analysis:
 
 1) The software was built using [Visual Studio 2019 community edition](https://visualstudio.microsoft.com/downloads/). Be sure to install the MFC module.
 2) It requires the DirectX 9 [June 2010 DirectX SDK ](https://www.microsoft.com/en-nz/download/details.aspx?id=6812)
-3) The software uses the [Eigen library](http://eigen.tuxfamily.org/index.php?title=Main_Page) to perform the SVD. To install Eigen, navigate to the C drive and clone it from github:
-
-&nbsp;&nbsp;&nbsp;&nbsp;`cd C:\`
+3) The software uses the [Eigen library](http://eigen.tuxfamily.org/index.php?title=Main_Page) to perform the SVD. To install Eigen clone it from github:
 
 &nbsp;&nbsp;&nbsp;&nbsp;`git clone https://gitlab.com/libeigen/eigen.git`
+
+and add an Environment variable named EIGEN_DIR containing the pathname to which Eigen was cloned.
  
  
 ## Running the software
