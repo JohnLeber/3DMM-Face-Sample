@@ -22,14 +22,6 @@ public:
 protected:
 	IDirect3DVertexBuffer9* m_pVB;
 	IDirect3DIndexBuffer9*  m_pIB;
-	bool DoesFileExist(CString strFile);
-	// the next two functions were used for loading precompted data using Matlab.
-	//void LoadEigenValues();
-	//void LoadMeanFace();
- 
-	 
-	 
-
 	HRESULT DrawTransformedQuad(LPDIRECT3DDEVICE9 pDevice,
 		FLOAT x, FLOAT y, FLOAT z,
 		FLOAT width, FLOAT height,

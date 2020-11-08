@@ -5,6 +5,7 @@
 #include "FaceMorph.h"
 #include "DxDlg.h" 
 #include "vertex.h" 
+#include "FileHandle.h" 
 
  
 //#include <iostream>
@@ -71,19 +72,16 @@ bool CDxWnd::Initialize(CWnd* pParent)
 	bool bResult = SUCCEEDED(InitD3D());
 	if (bResult)
 	{ 
-		InitAllVertexDeclarations(g_pD3DDevice);
-		//LoadEigenValues();
-		//LoadMeanFace();
-	 
+		InitAllVertexDeclarations(g_pD3DDevice);  
 		{
 			HRESULT hr = S_OK;
 			if (m_pVB == nullptr)
 			{
-				hr = g_pD3DDevice->CreateVertexBuffer(m_nNumVertices * sizeof(VertexPNT), D3DUSAGE_WRITEONLY, 0, D3DPOOL_MANAGED, &m_pVB, 0);
+				hr = g_pD3DDevice->CreateVertexBuffer((UINT)m_nNumVertices * sizeof(VertexPNT), D3DUSAGE_WRITEONLY, 0, D3DPOOL_MANAGED, &m_pVB, 0);
 			}
 			if (m_pIB == nullptr)
 			{
-				hr = g_pD3DDevice->CreateIndexBuffer(m_vIndices.size() * sizeof(DWORD), D3DUSAGE_WRITEONLY, D3DFMT_INDEX32, D3DPOOL_MANAGED, &m_pIB, 0);
+				hr = g_pD3DDevice->CreateIndexBuffer((UINT)m_vIndices.size() * sizeof(DWORD), D3DUSAGE_WRITEONLY, D3DFMT_INDEX32, D3DPOOL_MANAGED, &m_pIB, 0);
 			}
 			CEigenValues c;//default mesh to mean mesh only i.e. all eigenvalues set to zero)
 			RecalcMesh(c);
@@ -96,86 +94,6 @@ bool CDxWnd::Initialize(CWnd* pParent)
 	return bResult;
 }  
 //---------------------------------------------------------------//
-//void CDxWnd::LoadEigenValues()
-//{
-//	/*CString strPath = L"D:\\_FacesInWirld\\_Eigenvalues\\_eigen.dat";
-//	FILE* pFile = 0;
-//	errno_t ret = _tfopen_s(&pFile, strPath, TEXT("r"));
-//	if (ret == 0)
-//	{
-//		int h = 0;
-//		m_Eigen.reserve(NUM_EIGENS);
-//		m_Eigen.resize(NUM_EIGENS);
-//		for (int h = 0; h < NUM_EIGENS; h++)
-//		{
-//			m_Eigen[h].reserve(NUM_EIGEN_ELEMENTS);
-//			m_Eigen[h].resize(NUM_EIGEN_ELEMENTS);
-//		}
-//		while (!feof(pFile))
-//		{
-//			CHAR buffer[LINE_BUFF_SIZE];
-//			fgets(buffer, LINE_BUFF_SIZE, pFile);
-//
-//			sscanf_s(buffer, "%f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f ",
-//				&m_Eigen[0][h], &m_Eigen[1][h], &m_Eigen[2][h], &m_Eigen[3][h], &m_Eigen[4][h],
-//				&m_Eigen[5][h], &m_Eigen[6][h], &m_Eigen[7][h], &m_Eigen[8][h], &m_Eigen[9][h],
-//				&m_Eigen[10][h], &m_Eigen[11][h], &m_Eigen[12][h], &m_Eigen[13][h], &m_Eigen[14][h],
-//				&m_Eigen[15][h], &m_Eigen[16][h], &m_Eigen[17][h], &m_Eigen[18][h], &m_Eigen[19][h]);
-//			h++;
-//		}
-//		fclose(pFile);
-//	}*/
-//}
-////---------------------------------------------------------------//
-//void CDxWnd::LoadMeanFace()
-//{
-//	{
-//		/*CString strPath = L"D:\\_FacesInWirld\\_Eigenvalues\\_aveface.dat";
-//		FILE* pFile = 0;
-//		errno_t ret = _tfopen_s(&pFile, strPath, TEXT("r"));
-//		if (ret == 0)
-//		{
-//			m_AveFace.clear();
-//			m_AveFace.reserve(NUM_EIGEN_ELEMENTS);
-//			m_AveFace.resize(NUM_EIGEN_ELEMENTS);
-//			int h = 0;
-//			while (!feof(pFile))
-//			{
-//				CHAR buffer[LINE_BUFF_SIZE];
-//				fgets(buffer, LINE_BUFF_SIZE, pFile);
-//				sscanf_s(buffer, "%f", &m_AveFace[h]);
-//				m_AveFace[h] = m_AveCalc[h];
-//				h++;
-//			}
-//			fclose(pFile);
-//		}*/
-//		//m_AveFace = m_AveCalc;
-//	}
-//	/*{
-//		CString strPath = L"D:\\_FacesInWirld\\triangles.dat";
-//		FILE* pFile = 0;
-//		errno_t ret = _tfopen_s(&pFile, strPath, TEXT("r"));
-//		if (ret == 0)
-//		{
-//			m_vIndices.clear();
-//			m_vIndices.reserve(NUM_TRIANGLES * 3);  
-//			while (!feof(pFile))
-//			{
-//				INT nI1 = 0;
-//				INT nI2 = 0;
-//				INT nI3 = 0;
-//				CHAR buffer[LINE_BUFF_SIZE];
-//				fgets(buffer, LINE_BUFF_SIZE, pFile);
-//				sscanf_s(buffer + 1, "%d %d %d", &nI1, &nI2, &nI3); 
-//				m_vIndices.push_back(nI1 - 1);
-//				m_vIndices.push_back(nI2 - 1);
-//				m_vIndices.push_back(nI3 - 1);
-//			}
-//			fclose(pFile);
-//		}
-//	}*/
-//}
-//---------------------------------------------------------------//
 void CDxWnd::OnTimer(UINT_PTR nIDEvent)
 { 
 	CWnd::OnTimer(nIDEvent);
@@ -184,7 +102,9 @@ void CDxWnd::OnTimer(UINT_PTR nIDEvent)
 void CDxWnd::RecalcMesh(CEigenValues& e)
 {
 	if (m_nNumVertices == 0) return;
-	for (int j = 0; j < m_nNumVertices * 3; j++)
+	int nNumVerticesXYZ = m_nNumVertices * 3;
+	//the following could be vectorized with Intel IPP, but seems to run fast enough
+	for (int j = 0; j < nNumVerticesXYZ; j++)
 	{
 		float r = m_AveFace[j] / 8.0f;
 		for (int h = 0; h < NUM_EIGENS; h++)
@@ -193,6 +113,7 @@ void CDxWnd::RecalcMesh(CEigenValues& e)
 		}
 		m_Mesh[j] = r;
 	}
+	 
 	if (m_pVB && m_pIB)
 	{
 		VertexPNT* v = 0;
@@ -207,7 +128,7 @@ void CDxWnd::RecalcMesh(CEigenValues& e)
 		{
 			DWORD* k = 0;
 			HRESULT hr = m_pIB->Lock(0, 0, (void**)&k, 0);
-			int nNumTriangles = m_vIndices.size();
+			size_t nNumTriangles = m_vIndices.size();
 			for (int j = 0; j < nNumTriangles; j++)
 			{
 				k[j] = m_vIndices[j];
@@ -305,7 +226,7 @@ void CDxWnd::Render()
 		g_pEffect->CommitChanges();
 		hr = g_pD3DDevice->SetStreamSource(0, m_pVB, 0, sizeof(VertexPNT));
 		hr = g_pD3DDevice->SetIndices(m_pIB);		 
-		hr = g_pD3DDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0,0, m_nNumVertices, 0, m_vIndices.size() / 3);
+		hr = g_pD3DDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, m_nNumVertices, 0, (UINT)m_vIndices.size() / 3);
 		if (FAILED(hr))
 		{
 			ATLASSERT(0);
@@ -371,11 +292,11 @@ HRESULT CDxWnd::OnCreateDevice()
 			long nRight = strFileName.ReverseFind(_T('\\'));//move one folder up
 			strFileName = strFileName.Left(nRight);
 			nNumAttempts++;
-			if (DoesFileExist(strFileName + L"\\FaceMorph.fx")) {
+			if (CFileHelper::DoesFileExist(strFileName + L"\\FaceMorph.fx")) {
 				bFoundFX = true;
 				strFileName.Append(L"\\FaceMorph.fx");
 			}
-			else if (DoesFileExist(strFileName + L"\\FaceMorph\\FaceMorph.fx")) {
+			else if (CFileHelper::DoesFileExist(strFileName + L"\\FaceMorph\\FaceMorph.fx")) {
 				bFoundFX = true;
 				strFileName.Append(L"\\FaceMorph\\FaceMorph.fx");
 			}
@@ -423,26 +344,6 @@ HRESULT CDxWnd::OnCreateDevice()
 
 
 	return S_OK;
-}
-//---------------------------------------------------------------//
-bool CDxWnd::DoesFileExist(CString strFile)
-{
-	GetFileAttributes(strFile); // from winbase.h
-	DWORD dwError = GetLastError();
-	if (INVALID_FILE_ATTRIBUTES == GetFileAttributes(strFile) && (
-		dwError == ERROR_FILE_NOT_FOUND || 
-		dwError == ERROR_PATH_NOT_FOUND ||
-		dwError == ERROR_INVALID_NAME ||
-		dwError == ERROR_INVALID_DRIVE ||
-		dwError == ERROR_NOT_READY ||
-		dwError == ERROR_INVALID_PARAMETER ||
-		dwError == ERROR_BAD_PATHNAME ||
-		dwError == ERROR_BAD_NETPATH))
-	{
-		//File not found
-		return false;
-	}
-	return true;
 }
 //---------------------------------------------------------------//
 void CDxWnd::ShutDown()

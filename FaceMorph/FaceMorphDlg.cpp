@@ -6,6 +6,7 @@
 #include "framework.h"
 #include "FaceMorph.h"
 #include "FaceMorphDlg.h"
+#include "FileHandle.h"
 #include "DxDlg.h"
 #include "afxdialogex.h"
 #include <Eigen/Core>
@@ -186,7 +187,7 @@ bool CFaceMorphDlg::CalcEigenValues(CString strMeshPath)
 	}
 	std::vector<std::vector<float> > vMeshes;
 
-	CFileFind finder;
+	 
 	int nNumVertices = -1;
 	int nI1 = 0;
 	int nI2 = 0;
@@ -195,7 +196,7 @@ bool CFaceMorphDlg::CalcEigenValues(CString strMeshPath)
 	////////////////////////////////////////////////////////////////////////////////////////
 	//STEP ONE: load the files
 	////////////////////////////////////////////////////////////////////////////////////////
-
+	CFileFind finder;
 	//count the number of files we will have to load
 	int nNumFiles = 0;
 	BOOL bWorking = finder.FindFile(strMeshPath + _T("*.mesh"));
@@ -204,7 +205,7 @@ bool CFaceMorphDlg::CalcEigenValues(CString strMeshPath)
 		bWorking = finder.FindNextFile();
 		nNumFiles++;
 	}
-	finder.Close();
+	finder.Close(); 
 
 	int nFileCounter = 0;
 	bWorking = finder.FindFile(strMeshPath + _T("*.mesh"));
@@ -214,17 +215,16 @@ bool CFaceMorphDlg::CalcEigenValues(CString strMeshPath)
 		if (!bWorking) {
 			long ert = 0;
 		}
-		CString strPath = finder.GetFilePath();
-		FILE* pFile = 0;
-		int nCounter = 0;
-		errno_t ret = _tfopen_s(&pFile, strPath, TEXT("r"));
-		if (ret == 0)
+		CString strPath = finder.GetFilePath();  
+		int nCounter = 0; 
+		CFileHandle file(strPath, TEXT("r"));
+		if (file.GetFile() != 0)
 		{
 			//cound the vertices in advance and make sure they fit the vector
-			while (!feof(pFile))
+			while (!feof(file.GetFile()))
 			{
 				CHAR buffer[LINE_BUFF_SIZE];
-				fgets(buffer, LINE_BUFF_SIZE, pFile);
+				fgets(buffer, LINE_BUFF_SIZE, file.GetFile());
 				if (buffer[0] == 'v')
 				{
 					nCounter++;
@@ -236,7 +236,6 @@ bool CFaceMorphDlg::CalcEigenValues(CString strMeshPath)
 			}
 			else if (nNumVertices != nCounter)
 			{
-				fclose(pFile);
 				finder.Close();
 				AfxMessageBox(L"wrong size");
 				return false;
@@ -247,25 +246,27 @@ bool CFaceMorphDlg::CalcEigenValues(CString strMeshPath)
 				//we have enough info now to preallocate memory to avoid performance penalties caused by dynamic memory allocations...
 				vMeshes.reserve(nNumFiles);
 				vMeshes.resize(nNumFiles);
+				int nNumVerticesXYZ = nNumVertices * 3;
 				for (int h = 0; h < nNumFiles; h++)
 				{
-					vMeshes[h].reserve(nNumVertices * 3);
-					vMeshes[h].resize(nNumVertices * 3);
+					vMeshes[h].reserve(nNumVerticesXYZ);
+					vMeshes[h].resize(nNumVerticesXYZ);
 				}
-				m_pRenderWnd->m_AveFace.reserve(nNumVertices * 3);
-				m_pRenderWnd->m_AveFace.resize(nNumVertices * 3);
-				m_pRenderWnd->m_Mesh.reserve(nNumVertices * 3);
-				m_pRenderWnd->m_Mesh.resize(nNumVertices * 3);
+
+				m_pRenderWnd->m_AveFace.reserve(nNumVerticesXYZ);
+				m_pRenderWnd->m_AveFace.resize(nNumVerticesXYZ);
+				m_pRenderWnd->m_Mesh.reserve(nNumVerticesXYZ);
+				m_pRenderWnd->m_Mesh.resize(nNumVerticesXYZ);
 			}
-			rewind(pFile);
+			rewind(file.GetFile());
 			int nIndex = 0;
 			float x = 0;
 			float y = 0;
 			float z = 0;
-			while (!feof(pFile))
+			while (!feof(file.GetFile()))
 			{
 				CHAR buffer[LINE_BUFF_SIZE];
-				fgets(buffer, LINE_BUFF_SIZE, pFile);
+				fgets(buffer, LINE_BUFF_SIZE, file.GetFile());
 				if (0 == strncmp("v ", buffer, 2))
 				{
 					//load vertices into the vectors
@@ -287,64 +288,57 @@ bool CFaceMorphDlg::CalcEigenValues(CString strMeshPath)
 					m_pRenderWnd->m_vIndices.push_back(nI3 - 1);
 				}
 			}
-			nFileCounter++;
-			fclose(pFile);
+			nFileCounter++; 
 		}
 	}
-	finder.Close();
+	//finder.Close(); //note, CFileFinder calls Close on destructor, so we don't need to call this here
 
 	////////////////////////////////////////////////////////////////////////////////////////
 	//STEP TWO: calculate the mean/average face mesh
 	////////////////////////////////////////////////////////////////////////////////////////
-	//for (std::vector<float>::iterator i = m_pRenderWnd->m_AveFace.begin(); i != m_pRenderWnd->m_AveFace.end(); ++i)
-	//{
-	//*i = i* / nNumFiles;
-	//}
-	for (auto& i : m_pRenderWnd->m_AveFace)
-	{
-		i = i / nNumFiles;
-	}
+	for_each(m_pRenderWnd->m_AveFace.begin(), m_pRenderWnd->m_AveFace.end(), [nNumFiles](float& x) {x = x / nNumFiles; });
 
 	////////////////////////////////////////////////////////////////////////////////////////
 	//STEP THREE: subtract the mean from each face mesh
 	////////////////////////////////////////////////////////////////////////////////////////
-	for (int h = 0; h < nNumFiles; h++)
+	auto t = m_pRenderWnd->m_AveFace;
+	for (auto& m : vMeshes)
 	{
-		for (int j = 0; j < nNumVertices * 3; j++)
-		{
+		int j = 0;
+		for_each(m.begin(), m.end(), [&j, &t](float& x) {x = x - t[j]; j++; });
+	}
+	/*for (int h = 0; h < nNumFiles; h++)//older style for loop - but is it easier to read??
+	{
+		for (int j = 0; j < nNumVertices * 3; j++){
 			vMeshes[h][j] = vMeshes[h][j] - m_pRenderWnd->m_AveFace[j];
 		}
-	}
-	
-
+	}*/
 	////////////////////////////////////////////////////////////////////////////////////////
 	//STEP FOUR: calculate the eigenvectors
 	////////////////////////////////////////////////////////////////////////////////////////
-	Eigen::MatrixXf X(nNumVertices * 3, nNumFiles);
-	for (int h = 0; h < nNumFiles; h++)
+	int nNumVerticesXYZ = nNumVertices * 3;
+	Eigen::MatrixXf X(nNumVerticesXYZ, nNumFiles);
+	int h = 0;
+	for (auto& m : vMeshes)
 	{
-		for (int j = 0; j < nNumVertices * 3; j++)
-		{
+		int j = 0;
+		for_each(m.begin(), m.end(), [&j, h, &X](float& x) {X(j, h) = x; j++; });
+		h++;
+	}
+	/*for (int h = 0; h < nNumFiles; h++)//older style for loop - is this easier to read??
+	{
+		for (int j = 0; j < nNumVerticesXYZ; j++) {
 			X(j, h) = vMeshes[h][j];
 		}
-	}
+	}*/
 
 	//Use Principle Component Analysis. SVD routine in the Eigen library to do this
 	Eigen::JacobiSVD<Eigen::MatrixXf> svd(X, Eigen::ComputeThinU | Eigen::ComputeThinV);
 	Eigen::MatrixXf U = svd.matrixU();
 	Eigen::MatrixXf V = svd.matrixV();
 	Eigen::VectorXf s = svd.singularValues();
-	int rows = s.rows();
-	int columns = s.cols();
-
-#ifdef _DEBUG
-	//the following should give us an idea of which/how manu eigencvectors are important.
-	for (int h = 0; h < rows; h++)
-	{
-		ATLTRACE2(L"s(%d) = %f\n", h + 1, s(h));
-	}
-#endif
-	if (rows < NUM_EIGENS)
+ 
+	if (s.rows() < NUM_EIGENS)
 	{
 		CString strMsg;
 		strMsg.Format(L"Not enough eigenvectors found. We need at least %d. Please increase the number of meshes and restart the application.", NUM_EIGENS);
@@ -357,12 +351,13 @@ bool CFaceMorphDlg::CalcEigenValues(CString strMeshPath)
 	m_pRenderWnd->m_Eigen.resize(NUM_EIGENS);
 	for (int h = 0; h < NUM_EIGENS; h++)
 	{
-		m_pRenderWnd->m_Eigen[h].reserve(nNumVertices * 3);
-		m_pRenderWnd->m_Eigen[h].resize(nNumVertices * 3);
-		for (int j = 0; j < nNumVertices * 3; j++)
-		{
+		m_pRenderWnd->m_Eigen[h].reserve(nNumVerticesXYZ);
+		m_pRenderWnd->m_Eigen[h].resize(nNumVerticesXYZ);
+		int j = 0;
+		for_each(m_pRenderWnd->m_Eigen[h].begin(), m_pRenderWnd->m_Eigen[h].end(), [&j, h, &U](float& x) {x = U(j, h); j++; });
+		/*for (int j = 0; j < nNumVerticesXYZ; j++) 	{//older style, again, isn't it easier to read?
 			m_pRenderWnd->m_Eigen[h][j] = U(j, h);
-		}
+		}*/
 	}
 	//We now have the eigenvectors. The mesh that is rendered will be the average/mean mesh plus a linear combination of the 
 	//the eignevector meshes (m_Eigen). That is each eigenvector is multipled by the scalar corresponding to each slider in the UI.
@@ -555,7 +550,7 @@ void CFaceMorphDlg::OnBnClickedExport()
 				m_pRenderWnd->m_AveFace[2 * m_pRenderWnd->m_nNumVertices + j]);
 			f.WriteString(strLine);
 		}
-		long nNumTriangles = m_pRenderWnd->m_vIndices.size() / 3;
+		size_t nNumTriangles = m_pRenderWnd->m_vIndices.size() / 3;
 		for (int j = 0; j < nNumTriangles; j++)
 		{
 			strLine.Format(L"f %d %d %d\n",
