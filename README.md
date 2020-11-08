@@ -102,5 +102,10 @@ When starting the software, the following steps are performed:
 3) Production quality 3D Morphable Models of human faces typically seperate shape from facial expressions and have a set of eigenvectors for both. Some also include a third set for texture of the face. 
 4) Finally, I have not attempted to optimize performance (via threading, vectorization, cache coherency etc).
 
+## Further Reading
+
+1) For more information on the DirectX rendering method use in this application see "Introduction To 3D Game Programming With Directx 9.0C: A Shader Approach" by Frank Luna.
+2) [Steve Brunton's youtube](https://www.youtube.com/watch?v=XwTW_YA3HG0) channel includes several videos on how to use singular value decomposition (SVD) to efficiently represent human faces in 2D. 
+ 
 
 
