@@ -11,7 +11,7 @@
 Deep Neural Networks (DNNs) that perform Face Reconstruction (e.g. Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction)), or that take a 2D image of a human face and output a 3D mesh, often include a 3D Morphable Face Model (3DMM) as part of their pipeline. The purpose of this project was to help gain a practical understanding of 3DMMs when used in this context. Specifcally, when I downloaded and started to use Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction) the following questions came to mind:
 1) What exactly is a 3DMM?
 2) How does the DNN output the mesh? If the face mesh has 70,000+ vertices, does this mean the last layer of the DNN has this many outputs? (no, as it turns out).
-3) How are 3DMMs stored in files?
+3) 3DMMs are stored in files. What exactly are in these files?
 
 What follows is an attempt to answer these questions by creating a DirectX/C++ application that demonstrates how to construct and render a 3D Morphable Model (3DMM) of a human Face. An option to export the model is provided along with sample code for loading the model into Matlab.
 
