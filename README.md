@@ -104,7 +104,7 @@ When starting the software, the following steps are performed:
 
 ## Further Reading
 
-1) For more information on the DirectX rendering method use in this application see "Introduction To 3D Game Programming With Directx 9.0C: A Shader Approach" by Frank Luna.
+1) For more information on the DirectX rendering method use in this application see "[Introduction To 3D Game Programming With Directx 9.0C: A Shader Approach](https://www.amazon.com/Introduction-Game-Programming-Directx-9-0C/dp/1598220160)" by Frank Luna.
 2) [Steve Brunton's youtube](https://www.youtube.com/watch?v=XwTW_YA3HG0) channel includes several videos on how to use singular value decomposition (SVD) to efficiently represent human faces in 2D. 
  
 
