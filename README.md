@@ -1,10 +1,10 @@
-# 3DMM Face Sample ![Build](https://github.com/nodecomplete/3DMM-Face-Sample/workflows/Build/badge.svg)
+# 3DMM Face Sample ![Build](https://github.com/JohnLeber/3DMM-Face-Sample/workflows/Build/badge.svg)
 
-> Part two of a two part project to help me understand Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction) paper. [Click here for part one](https://github.com/nodecomplete/3D-Face-Frontalization).
+> Part two of a two part project to help me understand Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction) paper. [Click here for part one](https://github.com/JohnLeber/3D-Face-Frontalization).
 
 >**Note**: The purpose of this project was to help me understand what 3D Morphable Models (3DMM) are and how they are used with face reconstruction DNNs. While it can be used to create a 3DMM of a human face, it is unlikely that the approach used will result in a production quality 3DMM that would be suitable for research or commercial use. Consider what follows to be of educational value only.
 
-![alt text](https://github.com/nodecomplete/3DMM-Face-Sample/blob/master/FaceMorph/Faces.jpg)
+![alt text](https://github.com/JohnLeber/3DMM-Face-Sample/blob/master/FaceMorph/Faces.jpg)
 
 ## Introduction
 
@@ -49,13 +49,13 @@ In the demo application, the Meshes folder includes 204 face meshes and so we ha
  
 The image below shows theses scalars set to zero, so the image displayed is the average/mean face. 
 
-![alt text](https://github.com/nodecomplete/3DMM-Face-Sample/blob/master/FaceMorph/ScreenShot.jpg)
+![alt text](https://github.com/JohnLeber/3DMM-Face-Sample/blob/master/FaceMorph/ScreenShot.jpg)
 
 [comment]: <> (<img src="https://render.githubusercontent.com/render/math?math={\bigtriangleup S=\begin{bmatrix} \vdots   \\ {\bigtriangleup S^0  \bigtriangleup S^1  \ldots  \bigtriangleup S^{m-1}} \\ {\vdots  } \\ \end{bmatrix}}">)
  
 The second image shows the change in the mesh when the first slider (first principle component) is non-zero.
  
-![alt text](https://github.com/nodecomplete/3DMM-Face-Sample/blob/master/FaceMorph/ScreenShot2.jpg)
+![alt text](https://github.com/JohnLeber/3DMM-Face-Sample/blob/master/FaceMorph/ScreenShot2.jpg)
 
 The following conclusions can be drawn from the above analysis:
 
