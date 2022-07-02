@@ -1,8 +1,8 @@
 # 3DMM Face Sample ![Build](https://github.com/JohnLeber/3DMM-Face-Sample/workflows/Build/badge.svg)
 
-> **Warning**: This project uses DirectX 9, which is outdated now and may cause difficutly when building it on modern Windows installations.
-
 > Part two of a two part project to help me understand Microsoft's [Deep-3D-Face-Reconstruction](https://github.com/microsoft/Deep3DFaceReconstruction) paper. [Click here for part one](https://github.com/JohnLeber/3D-Face-Frontalization).
+
+> **Warning**: This project uses DirectX 9, which is outdated now and may cause difficulties when building on modern Windows installations. Also, what I am attempting to do in this project is outside my area of expertise, so any conclusions I made should be takenn with caution.
 
 >**Note**: The purpose of this project was to help me understand what 3D Morphable Models (3DMM) are and how they are used with face reconstruction DNNs. While it can be used to create a 3DMM of a human face, it is unlikely that the approach used will result in a production quality 3DMM that would be suitable for research or commercial use. Consider what follows to be of educational value only.
 
